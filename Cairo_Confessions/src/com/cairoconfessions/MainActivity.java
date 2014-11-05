@@ -1,22 +1,18 @@
 package com.cairoconfessions;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.EditText;
 
 public class MainActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -27,12 +23,22 @@ public class MainActivity extends Activity implements
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 
+	public final static String EXTRA_MESSAGE = "com.carioconfessions.MESSAGE";
 	/**
 	 * Used to store the last screen title. For use in
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-
+	
+	/** Called when the user clicks the Send button */
+	public void sendMessage(View view) {
+		Intent intent = new Intent(this, DisplayMessageActivity.class);
+		EditText editText = (EditText) findViewById(R.id.edit_message);
+		String message = editText.getText().toString();
+		intent.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,9 +90,10 @@ public class MainActivity extends Activity implements
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
-			getMenuInflater().inflate(R.menu.main, menu);
+		    getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+		    getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
-			return true;
+		    return super.onCreateOptionsMenu(menu);
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
