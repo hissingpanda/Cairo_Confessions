@@ -18,23 +18,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.app.ListActivity;
 
-public class ConfessionListActivity extends Activity {
-    private ListView tweetListView;
-    private String[] stringArray ;
-    private ArrayAdapter tweetItemArrayAdapter;
+public class ConfessionListActivity extends ListActivity {
+    //private ListView confessionListView;
+    private ArrayAdapter confessionItemArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_confession_list);
 
-       stringArray = new String[10];
-        for(int i=0; i < stringArray.length; i++){
-            stringArray[i] = "String " + i;
-        }
-      tweetItemArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stringArray);
-      tweetListView = (ListView) findViewById(R.id.confessionList);
-      tweetListView.setAdapter(tweetItemArrayAdapter);
+      confessionItemArrayAdapter = new ConfessionAdapter(this, new String[20]);
+      //confessionListView = (ListView) findViewById(R.id.confessionList);
+      setListAdapter(confessionItemArrayAdapter);
+    }
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        TextView t = (TextView) v.findViewById(R.id.confessionTitle);
+        t.setText("Confession Expands");
     }
 }

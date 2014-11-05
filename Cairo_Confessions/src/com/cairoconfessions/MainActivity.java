@@ -46,8 +46,8 @@ public class MainActivity extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-		  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
-	        startActivity(intent);
+		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
+	      //  startActivity(intent);
 	}
 
 	@Override
@@ -61,9 +61,12 @@ public class MainActivity extends Activity implements
 	}
 
 	public void onSectionAttached(int number) {
+		Intent intent;
 		switch (number) {
 		case 1:
 			mTitle = getString(R.string.title_section1);
+			intent = new Intent(MainActivity.this, ConfessionListActivity.class);
+	        startActivity(intent);
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
