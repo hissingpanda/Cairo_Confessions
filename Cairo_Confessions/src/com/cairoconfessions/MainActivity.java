@@ -3,8 +3,9 @@ package com.cairoconfessions;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -19,7 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements
+public class MainActivity extends FragmentActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
@@ -42,18 +43,25 @@ public class MainActivity extends Activity implements
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
+		setTitle("Cairo Confessions");
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
 	      //  startActivity(intent);
+		FragmentManager fm = getSupportFragmentManager();  
+		  
+		  if (fm.findFragmentById(android.R.id.content) == null) {  
+		   ConfessionListFragment list = new ConfessionListFragment();  
+		   fm.beginTransaction().add(android.R.id.content, list).commit();  
+		  }  
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
@@ -61,12 +69,12 @@ public class MainActivity extends Activity implements
 	}
 
 	public void onSectionAttached(int number) {
-		Intent intent;
+		//Intent intent;
 		switch (number) {
 		case 1:
 			mTitle = getString(R.string.title_section1);
-			intent = new Intent(MainActivity.this, ConfessionListActivity.class);
-	        startActivity(intent);
+			//intent = new Intent(MainActivity.this, ConfessionListActivity.class);
+	        //startActivity(intent);
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
@@ -136,7 +144,7 @@ public class MainActivity extends Activity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.row_confession, container,
 					false);
 			return rootView;
 		}
