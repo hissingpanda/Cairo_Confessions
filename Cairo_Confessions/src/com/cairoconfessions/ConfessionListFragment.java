@@ -23,11 +23,12 @@ import android.app.ListActivity;
 
 public class ConfessionListFragment extends ListFragment  
  {  
+  
+  String[] text = new String[] { "I’ve been living all my life abroad and I regret everything.",  "I’ve been living all my life abroad and I regret everything.",  "I’ve been living all my life abroad and I regret everything.",  "I’ve been living all my life abroad and I regret everything.",  
+		  "I’ve been living all my life abroad and I regret everything. One Two three four five six One Two three four five six One Two three four five six One Two three four five six", "six", "seven", "eight", "nine", "ten", "eleven",  
+    "twelve", "thirteen", "fourteen", "fifteen", "fifteen", "fifteen", "fifteen", "fifteen", "fifteen" };  
   /*
-  String[] numbers_text = new String[] { "one", "two", "three", "four",  
-    "five", "six", "seven", "eight", "nine", "ten", "eleven",  
-    "twelve", "thirteen", "fourteen", "fifteen" };  
-  String[] numbers_digits = new String[] { "1", "2", "3", "4", "5", "6", "7",  
+    String[] numbers_digits = new String[] { "1", "2", "3", "4", "5", "6", "7",  
     "8", "9", "10", "11", "12", "13", "14", "15" };  
   */
  // @Override  
@@ -40,8 +41,16 @@ public class ConfessionListFragment extends ListFragment
     Bundle savedInstanceState) {  
    ArrayAdapter<String> adapter = new ArrayAdapter<String>(  
      inflater.getContext(),	 R.layout.row_confession,  
-     new String[20]);  
+     text);  
    setListAdapter(adapter);  
+   setHasOptionsMenu(true);
    return super.onCreateView(inflater, container, savedInstanceState);  
   }  
+/*
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+	    MenuItem item= menu.findItem(R.id.menu_settings);
+	    item.setVisible(true);
+	    super.onPrepareOptionsMenu(menu);
+	}*/
 }  

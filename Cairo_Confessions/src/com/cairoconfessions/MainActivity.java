@@ -39,17 +39,18 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
+		
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		mTitle = getTitle();
-		setTitle("Cairo Confessions");
+		mTitle = "Cairo Confessions";
+		getActionBar().setTitle("Cairo Confessions");
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
 	      //  startActivity(intent);
+		
 		FragmentManager fm = getSupportFragmentManager();  
 		  
 		  if (fm.findFragmentById(android.R.id.content) == null) {  
@@ -64,6 +65,7 @@ public class MainActivity extends FragmentActivity implements
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
+				//should be content_frame
 				.replace(R.id.container,
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
@@ -72,7 +74,7 @@ public class MainActivity extends FragmentActivity implements
 		//Intent intent;
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_section1);
+			mTitle = "Feed";
 			//intent = new Intent(MainActivity.this, ConfessionListActivity.class);
 	        //startActivity(intent);
 			break;
@@ -84,6 +86,14 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		}
 	}
+	/*
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    MenuItem item= menu.findItem(R.id.menu_settings);
+	    item.setVisible(true);
+	    super.onPrepareOptionsMenu(menu);
+	}
+	*/
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
