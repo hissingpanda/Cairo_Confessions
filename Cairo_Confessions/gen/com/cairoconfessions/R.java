@@ -35,18 +35,19 @@ public final class R {
         public static final int navigation_drawer_width=0x7f040002;
     }
     public static final class drawable {
-        public static final int drawer_shadow=0x7f020000;
-        public static final int ic_action_info=0x7f020001;
-        public static final int ic_action_new=0x7f020002;
-        public static final int ic_action_photo=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_drawer=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int ic_launcher2=0x7f020007;
-        public static final int ic_list_remove=0x7f020008;
+        public static final int border=0x7f020000;
+        public static final int drawer_shadow=0x7f020001;
+        public static final int ic_action_info=0x7f020002;
+        public static final int ic_action_new=0x7f020003;
+        public static final int ic_action_photo=0x7f020004;
+        public static final int ic_action_search=0x7f020005;
+        public static final int ic_drawer=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int ic_launcher2=0x7f020008;
+        public static final int ic_list_remove=0x7f020009;
     }
     public static final class id {
-        public static final int action_example=0x7f050007;
+        public static final int action_example=0x7f05000f;
         public static final int action_flip=0x7f050001;
         /** 
         These action bar item IDs (menu item IDs) are defined here for
@@ -57,26 +58,36 @@ public final class R {
     
          */
         public static final int action_next=0x7f050000;
-        public static final int action_search=0x7f050008;
-        public static final int action_settings=0x7f050006;
-        public static final int content=0x7f050005;
-        public static final int drawer_layout=0x7f050002;
-        public static final int navigation_drawer=0x7f050004;
-        public static final int pager=0x7f050003;
+        public static final int action_search=0x7f050010;
+        public static final int action_settings=0x7f05000e;
+        public static final int container=0x7f050002;
+        public static final int content=0x7f05000c;
+        public static final int content_cat=0x7f050006;
+        public static final int content_loc=0x7f050008;
+        public static final int content_main=0x7f05000a;
+        public static final int delete_button=0x7f05000d;
+        public static final int drawer_layout=0x7f050003;
+        public static final int filter_cat=0x7f050007;
+        public static final int filter_loc=0x7f050009;
+        public static final int filter_main=0x7f05000b;
+        public static final int navigation_drawer=0x7f050005;
+        public static final int pager=0x7f050004;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060000;
         public static final int card_flip_time_half=0x7f060001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_screen_slide=0x7f030001;
-        public static final int fragment_category_screen_slide_page=0x7f030002;
-        public static final int fragment_location_screen_slide_page=0x7f030003;
-        public static final int fragment_main=0x7f030004;
-        public static final int fragment_main_screen_slide_page=0x7f030005;
-        public static final int fragment_navigation_drawer=0x7f030006;
-        public static final int fragment_screen_slide_page=0x7f030007;
+        public static final int activity_layout_changes=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_screen_slide=0x7f030002;
+        public static final int fragment_category_screen_slide_page=0x7f030003;
+        public static final int fragment_location_screen_slide_page=0x7f030004;
+        public static final int fragment_main=0x7f030005;
+        public static final int fragment_main_screen_slide_page=0x7f030006;
+        public static final int fragment_navigation_drawer=0x7f030007;
+        public static final int fragment_screen_slide_page=0x7f030008;
+        public static final int list_item_example=0x7f030009;
     }
     public static final class menu {
         public static final int global=0x7f0a0000;
@@ -85,6 +96,9 @@ public final class R {
     }
     public static final class string {
         public static final int action_example=0x7f070006;
+        /**  Actions 
+         */
+        public static final int action_remove_item=0x7f07000f;
         public static final int action_search=0x7f070008;
         public static final int action_settings=0x7f070007;
         /**  Titles 
@@ -93,13 +107,12 @@ public final class R {
         public static final int button_send=0x7f07000a;
         public static final int edit_message=0x7f070009;
         public static final int hello_world=0x7f07000d;
-        /**  Actions 
- Messages 
+        /**  Messages 
  Accessibility-only descriptions 
  Other strings 
          */
-        public static final int lorem_ipsum=0x7f07000f;
-        public static final int lorem_ipsum_main=0x7f070010;
+        public static final int lorem_ipsum=0x7f070010;
+        public static final int lorem_ipsum_main=0x7f070011;
         public static final int navigation_drawer_close=0x7f070005;
         public static final int navigation_drawer_open=0x7f070004;
         public static final int title_activity_display_message=0x7f07000c;

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.cairoconfessions.MainActivity;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
@@ -70,14 +71,17 @@ public class ScreenSlidePageFragment extends android.support.v4.app.Fragment {
     	 case 0:
     		 rootView = (ViewGroup) inflater
     		 .inflate(R.layout.fragment_location_screen_slide_page, container, false);
+
     		 break;
     	 case 1:
     		 rootView = (ViewGroup) inflater
     		 .inflate(R.layout.fragment_main_screen_slide_page, container, false);
+
     		 break;
     	 case 2:
     		 rootView = (ViewGroup) inflater
     		 .inflate(R.layout.fragment_category_screen_slide_page, container, false);
+
     		 break;
     	 default: rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page, container, false);
