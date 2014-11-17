@@ -2,10 +2,11 @@ package com.cairoconfessions;
 
 import android.app.Activity;
 import android.app.ActionBar;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -273,14 +274,19 @@ public class NavigationDrawerFragment extends Fragment {
 		}
 
 		if (item.getItemId() == R.id.action_example) {
-			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT)
-					.show();
+			sendMessage(getView());
+			//Toast.makeText(getActivity(), "Compose Message.", Toast.LENGTH_SHORT)
+				//	.show();
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
-
+	public void sendMessage(View view) {
+		Intent intent;
+		intent = new Intent(view.getContext(), ComposeActivity.class);
+    	startActivity(intent);
+	}
 	/**
 	 * Per the navigation drawer design guidelines, updates the action bar to
 	 * show the global app 'context', rather than just what's in the current
