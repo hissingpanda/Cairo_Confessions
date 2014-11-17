@@ -1,39 +1,67 @@
+/*
+ * Copyright 2012 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.cairoconfessions;
 
-import android.app.Activity;
+import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * The launchpad activity for this sample project. This activity launches other
+ * activities that demonstrate implementations of common animations.
+ */
 public class MainActivity extends FragmentActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
-
 	/**
-	 * Fragment managing the behaviors, interactions and presentation of the
-	 * navigation drawer.
+	 * The number of pages (wizard steps) to show in this demo.
 	 */
+	private static final int NUM_PAGES = 3;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private CharSequence mTitle;
+	/**
+	 * The pager widget, which handles animation and allows swiping horizontally
+	 * to access previous and next wizard steps.
+	 */
+	private ViewPager mPager;
 
 	/**
-	 * Used to store the last screen title. For use in
-	 * {@link #restoreActionBar()}.
+	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
-	private CharSequence mTitle;
+	private PagerAdapter mPagerAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +76,165 @@ public class MainActivity extends FragmentActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
+//<<<<<<< HEAD
+
 		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
 	      //  startActivity(intent);
 		
-		FragmentManager fm = getSupportFragmentManager();  
-		  
+		//FragmentManager fm = getSupportFragmentManager();  
+		/*  
 		  if (fm.findFragmentById(android.R.id.content) == null) {  
 		   ConfessionListFragment list = new ConfessionListFragment();  
 		   fm.beginTransaction().add(android.R.id.content, list).commit();  
-		  }  
+		  }*/  
+/*
+		Fragment list_fragment = new ConfessionListFragment();
+
+		FragmentTransaction fm = getSupportFragmentManager().beginTransaction().add(android.R.id.content, list_fragment);
+		//fm.replace(R.id.content, list_fragment);
+		fm.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		fm.commit();
+		fm.hide(list_fragment);
+		*/
+//=======
+
+		// Instantiate a ViewPager and a PagerAdapter.
+		mPager = (ViewPager) findViewById(R.id.pager);
+		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+		mPager.setAdapter(mPagerAdapter);
+		mPager.setCurrentItem(1);
+
+		//fm.show(list_fragment);
+		mPager.setOffscreenPageLimit(2);
+		/*
+		 * mPager.setOnPageChangeListener(new
+		 * ViewPager.SimpleOnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int position) { // When changing
+		 * pages, reset the action bar actions since they are dependent // on
+		 * which page is currently active. An alternative approach is to have
+		 * each // fragment expose actions itself (rather than the activity
+		 * exposing actions), // but for simplicity, the activity provides the
+		 * actions in this sample. invalidateOptionsMenu(); } });
+		 */
+	}
+	public ArrayList<View> mFilters = new ArrayList<View>();
+
+/*	public void addItems() {
+		ArrayList<View> presentView = new ArrayList<View>();
+		final ViewGroup mFilter = (ViewGroup)findViewById(R.id.filter_cat);
+		for(int i=0; i<mFilters.size();i++){
+			final ViewGroup newView = (ViewGroup) mFilters.get(i);
+			mFilter.findViewsWithText(presentView, ((TextView) newView.findViewById(android.R.id.text1)).getText(),1);
+			if(mFilter != null && presentView.size()==0){
+				((ViewGroup) newView.getParent()).removeView(newView);
+				mFilter.addView(newView);
+				newView.findViewById(R.id.delete_button).setOnClickListener(
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mFilter.removeView(newView);
+			//				mFilterMain.removeView(newView);
+						}
+					});
+			}
+		}
+	}*/
+	public void addItem(View view) {
+		// Instantiate a new "row" view.
+		final ViewGroup mFilter = (ViewGroup)findViewById(R.id.filter_cat);
+		final ViewGroup mFilterLoc = (ViewGroup)findViewById(R.id.filter_loc);
+		final ViewGroup mFilterMain = (ViewGroup) findViewById(R.id.filter_main);
+		final ViewGroup newView = (ViewGroup) LayoutInflater.from(this)
+				.inflate(R.layout.list_item_example, null);
+		final ViewGroup newViewLoc = (ViewGroup) LayoutInflater.from(this)
+				.inflate(R.layout.list_item_example, null);
+		final ViewGroup newViewMain = (ViewGroup) LayoutInflater.from(this)
+				.inflate(R.layout.list_item_example, null);
+		ArrayList<View> presentView = new ArrayList<View>();
+		mFilter.findViewsWithText(presentView, ((TextView) view).getText(),1);
+		
+		if (presentView.size()==0) {
+			// Set the text in the new row to a random country.
+			((TextView) newView.findViewById(android.R.id.text1))
+					.setText(((TextView) view).getText());
+			((TextView) newViewLoc.findViewById(android.R.id.text1))
+				.setText(((TextView) view).getText());
+			((TextView) newViewMain.findViewById(android.R.id.text1))
+				.setText(((TextView) view).getText());
+			// Set a click listener for the "X" button in the row that will
+			// remove the row.
+			
+			newView.findViewById(R.id.delete_button).setOnClickListener(
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mFilter.removeView(newView);
+							mFilterLoc.removeView(newViewLoc);
+							mFilterMain.removeView(newViewMain);
+							if (mFilter.getChildCount() == 0) {
+			                    findViewById(R.id.content_loc).setVisibility(View.GONE);
+			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
+			                    findViewById(R.id.content_main).setVisibility(View.GONE);
+			                }
+						}
+					});
+			newViewLoc.findViewById(R.id.delete_button).setOnClickListener(
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mFilterLoc.removeView(newViewLoc);
+							mFilter.removeView(newView);
+							mFilterMain.removeView(newViewMain);
+							if (mFilterLoc.getChildCount() == 0) {
+								findViewById(R.id.content_loc).setVisibility(View.GONE);
+			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
+			                    findViewById(R.id.content_main).setVisibility(View.GONE);
+			                }
+						}
+						
+					});
+			newViewMain.findViewById(R.id.delete_button).setOnClickListener(
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							mFilterLoc.removeView(newViewLoc);
+							mFilter.removeView(newView);
+							mFilterMain.removeView(newViewMain);
+							if (mFilterMain.getChildCount() == 0) {
+								findViewById(R.id.content_loc).setVisibility(View.GONE);
+			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
+			                    findViewById(R.id.content_main).setVisibility(View.GONE);
+			                }
+						}
+					});
+	
+			// Because mFilter has android:animateLayoutChanges set to true,
+			// adding this view is automatically animated.
+			//mFilterCat.addView(newViewCat);
+			mFilters.add(newView);
+			mFilter.addView(newView);
+			mFilterLoc.addView(newViewLoc);
+			mFilterMain.addView(newViewMain);
+			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
+            findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
+            findViewById(R.id.content_main).setVisibility(View.VISIBLE);
+        }
 	}
 
-	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
+				/*
+<<<<<<< HEAD
 				//should be content_frame
 				.replace(R.id.container,
+=======
+*/
+				.replace(R.id.pager,
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
@@ -99,7 +267,8 @@ public class MainActivity extends FragmentActivity implements
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		if (mTitle != "Cairo Confessions")
+			actionBar.setTitle(mTitle);
 	}
 
 	@Override
@@ -108,9 +277,10 @@ public class MainActivity extends FragmentActivity implements
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
+			getMenuInflater().inflate(R.menu.main_activity_actions, menu);
 			getMenuInflater().inflate(R.menu.main, menu);
 			restoreActionBar();
-			return true;
+			return super.onCreateOptionsMenu(menu);
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -167,4 +337,24 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment}
+	 * objects, in sequence.
+	 */
+	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+		public ScreenSlidePagerAdapter(android.support.v4.app.FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public android.support.v4.app.Fragment getItem(int position) {
+			//addItems();
+			return ScreenSlidePageFragment.create(position);
+		}
+
+		@Override
+		public int getCount() {
+			return NUM_PAGES;
+		}
+	}
 }
