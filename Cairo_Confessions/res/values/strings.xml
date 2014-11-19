@@ -46,4 +46,14 @@
     <color name="guilt">#05573A</color>
     <color name="dream">#09D3DE</color>
     <color name="fantasy">#FF0095</color>
+    <string-array name="countries_array">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+    </string-array>
 </resources>

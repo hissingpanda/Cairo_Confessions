@@ -26,20 +26,21 @@
     android:visibility="gone"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="25dp"
     android:background="@drawable/border">
 	<TextView 
         style="?android:textAppearanceMedium"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
     	android:layout_margin="2dp"
     	android:text="Filters:"
-        android:textSize="18sp" />
+    	android:gravity="center"
+        android:textSize="16sp" />
     <!-- A vertical LinearLayout in a ScrollView. This emulates a ListView (and is lighter weight
          than a ListView when there aren't many rows). -->
     <ScrollView android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
     	android:fadeScrollbars="false">
 
         <!-- Note that this LinearLayout has the "animateLayoutChanges" property set to true.
