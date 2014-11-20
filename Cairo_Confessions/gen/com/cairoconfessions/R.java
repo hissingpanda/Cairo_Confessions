@@ -144,52 +144,57 @@ containing a value of this type.
         public static final int navigation_drawer_width=0x7f040002;
     }
     public static final class drawable {
-        public static final int border=0x7f020000;
-        public static final int custom_tab_indicator=0x7f020001;
-        public static final int custom_tab_indicator_divider=0x7f020002;
-        public static final int custom_tab_indicator_focused=0x7f020003;
-        public static final int custom_tab_indicator_selected=0x7f020004;
-        public static final int custom_tab_indicator_selected_focused=0x7f020005;
-        public static final int custom_tab_indicator_selected_pressed=0x7f020006;
-        public static final int custom_tab_indicator_unselected=0x7f020007;
-        public static final int custom_tab_indicator_unselected_focused=0x7f020008;
-        public static final int custom_tab_indicator_unselected_pressed=0x7f020009;
-        public static final int drawer_shadow=0x7f02000a;
-        public static final int ic_action_info=0x7f02000b;
-        public static final int ic_action_new=0x7f02000c;
-        public static final int ic_action_photo=0x7f02000d;
-        public static final int ic_action_search=0x7f02000e;
-        public static final int ic_drawer=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ic_launcher2=0x7f020011;
-        public static final int ic_list_remove=0x7f020012;
-        public static final int icon=0x7f020013;
-        public static final int perm_group_calendar=0x7f020014;
-        public static final int perm_group_calendar_normal=0x7f020015;
-        public static final int perm_group_calendar_selected=0x7f020016;
-        public static final int perm_group_camera=0x7f020017;
-        public static final int perm_group_camera_normal=0x7f020018;
-        public static final int perm_group_camera_selected=0x7f020019;
-        public static final int perm_group_device_alarms=0x7f02001a;
-        public static final int perm_group_device_alarms_normal=0x7f02001b;
-        public static final int perm_group_device_alarms_selected=0x7f02001c;
-        public static final int perm_group_location=0x7f02001d;
-        public static final int perm_group_location_normal=0x7f02001e;
-        public static final int perm_group_location_selected=0x7f02001f;
-        public static final int tab_background=0x7f020020;
-        public static final int tab_background_focused=0x7f020021;
-        public static final int tab_background_normal=0x7f020022;
-        public static final int tab_background_pressed=0x7f020023;
-        public static final int vpi__tab_indicator=0x7f020024;
-        public static final int vpi__tab_selected_focused_holo=0x7f020025;
-        public static final int vpi__tab_selected_holo=0x7f020026;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020027;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020028;
-        public static final int vpi__tab_unselected_holo=0x7f020029;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02002a;
+        public static final int bluebk=0x7f020000;
+        public static final int border=0x7f020001;
+        public static final int compose=0x7f020002;
+        public static final int custom_tab_indicator=0x7f020003;
+        public static final int custom_tab_indicator_divider=0x7f020004;
+        public static final int custom_tab_indicator_focused=0x7f020005;
+        public static final int custom_tab_indicator_selected=0x7f020006;
+        public static final int custom_tab_indicator_selected_focused=0x7f020007;
+        public static final int custom_tab_indicator_selected_pressed=0x7f020008;
+        public static final int custom_tab_indicator_unselected=0x7f020009;
+        public static final int custom_tab_indicator_unselected_focused=0x7f02000a;
+        public static final int custom_tab_indicator_unselected_pressed=0x7f02000b;
+        public static final int drawer_shadow=0x7f02000c;
+        public static final int home=0x7f02000d;
+        public static final int ic_action_info=0x7f02000e;
+        public static final int ic_action_new=0x7f02000f;
+        public static final int ic_action_photo=0x7f020010;
+        public static final int ic_action_search=0x7f020011;
+        public static final int ic_drawer=0x7f020012;
+        public static final int ic_edit=0x7f020013;
+        public static final int ic_launcher=0x7f020014;
+        public static final int ic_launcher2=0x7f020015;
+        public static final int ic_list_remove=0x7f020016;
+        public static final int icon=0x7f020017;
+        public static final int perm_group_calendar=0x7f020018;
+        public static final int perm_group_calendar_normal=0x7f020019;
+        public static final int perm_group_calendar_selected=0x7f02001a;
+        public static final int perm_group_camera=0x7f02001b;
+        public static final int perm_group_camera_normal=0x7f02001c;
+        public static final int perm_group_camera_selected=0x7f02001d;
+        public static final int perm_group_device_alarms=0x7f02001e;
+        public static final int perm_group_device_alarms_normal=0x7f02001f;
+        public static final int perm_group_device_alarms_selected=0x7f020020;
+        public static final int perm_group_location=0x7f020021;
+        public static final int perm_group_location_normal=0x7f020022;
+        public static final int perm_group_location_selected=0x7f020023;
+        public static final int tab_background=0x7f020024;
+        public static final int tab_background_focused=0x7f020025;
+        public static final int tab_background_normal=0x7f020026;
+        public static final int tab_background_pressed=0x7f020027;
+        public static final int tweet_icon=0x7f020028;
+        public static final int vpi__tab_indicator=0x7f020029;
+        public static final int vpi__tab_selected_focused_holo=0x7f02002a;
+        public static final int vpi__tab_selected_holo=0x7f02002b;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02002c;
+        public static final int vpi__tab_unselected_focused_holo=0x7f02002d;
+        public static final int vpi__tab_unselected_holo=0x7f02002e;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f02002f;
     }
     public static final class id {
-        public static final int action_example=0x7f050014;
+        public static final int action_example=0x7f050016;
         public static final int action_flip=0x7f050001;
         /** 
         These action bar item IDs (menu item IDs) are defined here for
@@ -200,18 +205,19 @@ containing a value of this type.
     
          */
         public static final int action_next=0x7f050000;
-        public static final int action_search=0x7f050015;
-        public static final int action_settings=0x7f050013;
+        public static final int action_search=0x7f050017;
+        public static final int action_settings=0x7f050015;
         public static final int addLocation=0x7f05000b;
-        public static final int add_page=0x7f050017;
+        public static final int add_page=0x7f050019;
         public static final int blackline=0x7f050006;
         public static final int colorline=0x7f050005;
         public static final int container=0x7f050002;
-        public static final int content=0x7f050011;
+        public static final int content=0x7f050012;
         public static final int content_cat=0x7f050009;
+        public static final int content_frame=0x7f050011;
         public static final int content_loc=0x7f05000c;
         public static final int content_main=0x7f05000f;
-        public static final int delete_button=0x7f050012;
+        public static final int delete_button=0x7f050013;
         public static final int drawer_layout=0x7f050003;
         public static final int filter_cat=0x7f05000a;
         public static final int filter_loc=0x7f05000d;
@@ -219,8 +225,9 @@ containing a value of this type.
         public static final int locations=0x7f05000e;
         public static final int navigation_drawer=0x7f050008;
         public static final int pager=0x7f050007;
-        public static final int random=0x7f050016;
-        public static final int remove_page=0x7f050018;
+        public static final int random=0x7f050018;
+        public static final int remove_page=0x7f05001a;
+        public static final int row_confession=0x7f050014;
         public static final int swipey_tabs=0x7f050004;
     }
     public static final class integer {
@@ -228,17 +235,19 @@ containing a value of this type.
         public static final int card_flip_time_half=0x7f060001;
     }
     public static final class layout {
-        public static final int activity_layout_changes=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_screen_slide=0x7f030002;
-        public static final int fragment_category_screen_slide_page=0x7f030003;
-        public static final int fragment_location_screen_slide_page=0x7f030004;
-        public static final int fragment_main=0x7f030005;
-        public static final int fragment_main_screen_slide_page=0x7f030006;
-        public static final int fragment_navigation_drawer=0x7f030007;
-        public static final int fragment_screen_slide_page=0x7f030008;
-        public static final int list_item_example=0x7f030009;
-        public static final int tab_swipey=0x7f03000a;
+        public static final int activity_confession_list=0x7f030000;
+        public static final int activity_layout_changes=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_screen_slide=0x7f030003;
+        public static final int fragment_category_screen_slide_page=0x7f030004;
+        public static final int fragment_location_screen_slide_page=0x7f030005;
+        public static final int fragment_main=0x7f030006;
+        public static final int fragment_main_screen_slide_page=0x7f030007;
+        public static final int fragment_navigation_drawer=0x7f030008;
+        public static final int fragment_screen_slide_page=0x7f030009;
+        public static final int list_item_example=0x7f03000a;
+        public static final int row_confession=0x7f03000b;
+        public static final int tab_swipey=0x7f03000c;
     }
     public static final class menu {
         public static final int global=0x7f0b0000;
