@@ -87,16 +87,6 @@ public class ScreenSlidePageFragment extends android.support.v4.app.Fragment {
 			AutoCompleteTextView textView = (AutoCompleteTextView) rootView
 					.findViewById(R.id.addLocation);
 			textView.setAdapter(adapter);
-			final AutoCompleteTextView addLoc = (AutoCompleteTextView) getActivity()
-					.findViewById(R.id.addLocation);
-			textView.setOnFocusChangeListener(new OnFocusChangeListener() {
-				public void onFocusChange(View v, boolean hasFocus) {
-
-					if (hasFocus && mPageNumber != 0) {
-						addLoc.setSelected(false);
-					}
-				}
-			});
 			break;
 		case 1:
 			rootView = (ViewGroup) inflater.inflate(

@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:completionThreshold="1"
-            android:focusable="true" 
+            android:focusable="true"
 			android:focusableInTouchMode="true"
             android:hint="Add location" />
 
@@ -44,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:background="@drawable/border"
-        android:visibility="gone" >
+        android:visibility="gone"
+        android:layout_margin="3dp" >
 
         <TextView
             style="?android:textAppearanceMedium"

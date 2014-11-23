@@ -22,6 +22,7 @@
     <!-- Dummy content. -->
 <LinearLayout
     android:visibility="gone"
+    android:layout_margin="3dp"
     android:id="@+id/content_cat"
     android:layout_width="match_parent"
     android:layout_height="25dp"

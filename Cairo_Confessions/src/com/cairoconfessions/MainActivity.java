@@ -19,24 +19,31 @@ package com.cairoconfessions;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.animation.LayoutTransition;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -95,14 +102,6 @@ public class MainActivity extends FragmentActivity implements
 		mSwipeyTabs.setAdapter(mSwipeyTabsAdapter);
 		mSwipeyTabs.setViewPager(mPager);
 
-		/*mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
-				((AutoCompleteTextView) findViewById(R.id.addLocation)).setCursorVisible(false);
-			}
-		});*/
 
 	}
 
@@ -226,9 +225,9 @@ public class MainActivity extends FragmentActivity implements
 			// Because mFilter has android:animateLayoutChanges set to true,
 			// adding this view is automatically animated.
 			// mFilterCat.addView(newViewCat);
-			mFilter.addView(newView);
-			mFilterLoc.addView(newViewLoc);
-			mFilterMain.addView(newViewMain);
+			mFilter.addView(newView,0);
+			mFilterLoc.addView(newViewLoc,0);
+			mFilterMain.addView(newViewMain,0);
 			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_main).setVisibility(View.VISIBLE);
@@ -255,9 +254,18 @@ public class MainActivity extends FragmentActivity implements
 		case 3:
 			mTitle = getString(R.string.title_section3);
 			break;
+		case 4:
+			getSettings();
+			break;
+		
 		}
 	}
-
+	public void getSettings(){
+			Intent intent;
+			intent = new Intent(this, SettingActivity.class);
+			startActivityForResult(intent, 1);
+	
+	}
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -279,7 +287,39 @@ public class MainActivity extends FragmentActivity implements
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
+	public void sendMessage() {
+		Intent intent;
+		intent = new Intent(this, ComposeActivity.class);
+		startActivityForResult(intent, 1);
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 1) {
+			String confession = data.getExtras().get("result").toString();
+			TextView newConfess = new TextView(this);
+			newConfess.setText(confession);
+			final float scale = getResources().getDisplayMetrics().density;
+			newConfess.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,((int)(scale*194+0.5f))));
+			newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			newConfess.setGravity(Gravity.CENTER);
+			newConfess.setEllipsize(TextUtils.TruncateAt.END);
+			newConfess.setBackgroundResource(R.drawable.bluebk);
+			newConfess.setTypeface(Typeface.SERIF,Typeface.NORMAL);
+			newConfess.setEms(10);
+			newConfess.setMaxLines(3);
+			Animation fadeIn = new AlphaAnimation(0, 1);
+		    fadeIn.setDuration(1000);
+		    newConfess.setAnimation(fadeIn);
+			((LinearLayout)findViewById(R.id.confession_list)).addView(newConfess,0);
+			mPager.setCurrentItem(1);
+		}
 
+	}
+	public void restoreCursor(){
+		((AutoCompleteTextView) findViewById(R.id.addLocation))
+		.setCursorVisible(true);
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -287,6 +327,10 @@ public class MainActivity extends FragmentActivity implements
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if (id == R.id.action_example) {
+			sendMessage();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

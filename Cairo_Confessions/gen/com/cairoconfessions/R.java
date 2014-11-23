@@ -9,7 +9,9 @@ package com.cairoconfessions;
 
 public final class R {
     public static final class array {
+        public static final int cat_array=0x7f090001;
         public static final int countries_array=0x7f090000;
+        public static final int lang_array=0x7f090002;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -120,6 +122,7 @@ containing a value of this type.
         public static final int textColorSelected=0x7f010002;
     }
     public static final class color {
+        public static final int confession=0x7f080005;
         public static final int dream=0x7f080003;
         public static final int fantasy=0x7f080004;
         public static final int guilt=0x7f080002;
@@ -157,15 +160,15 @@ containing a value of this type.
         public static final int custom_tab_indicator_unselected_focused=0x7f02000a;
         public static final int custom_tab_indicator_unselected_pressed=0x7f02000b;
         public static final int drawer_shadow=0x7f02000c;
-        public static final int home=0x7f02000d;
-        public static final int ic_action_info=0x7f02000e;
-        public static final int ic_action_new=0x7f02000f;
-        public static final int ic_action_photo=0x7f020010;
-        public static final int ic_action_search=0x7f020011;
-        public static final int ic_drawer=0x7f020012;
-        public static final int ic_edit=0x7f020013;
-        public static final int ic_launcher=0x7f020014;
-        public static final int ic_launcher2=0x7f020015;
+        public static final int gray_border=0x7f02000d;
+        public static final int home=0x7f02000e;
+        public static final int ic_action_info=0x7f02000f;
+        public static final int ic_action_new=0x7f020010;
+        public static final int ic_action_photo=0x7f020011;
+        public static final int ic_action_search=0x7f020012;
+        public static final int ic_drawer=0x7f020013;
+        public static final int ic_edit=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
         public static final int ic_list_remove=0x7f020016;
         public static final int icon=0x7f020017;
         public static final int perm_group_calendar=0x7f020018;
@@ -194,7 +197,8 @@ containing a value of this type.
         public static final int vpi__tab_unselected_pressed_holo=0x7f02002f;
     }
     public static final class id {
-        public static final int action_example=0x7f050016;
+        public static final int VerticalLine=0x7f050017;
+        public static final int action_example=0x7f05001b;
         public static final int action_flip=0x7f050001;
         /** 
         These action bar item IDs (menu item IDs) are defined here for
@@ -205,29 +209,33 @@ containing a value of this type.
     
          */
         public static final int action_next=0x7f050000;
-        public static final int action_search=0x7f050017;
-        public static final int action_settings=0x7f050015;
-        public static final int addLocation=0x7f05000b;
-        public static final int add_page=0x7f050019;
-        public static final int blackline=0x7f050006;
+        public static final int action_search=0x7f05001c;
+        public static final int action_settings=0x7f05001a;
+        public static final int addLocation=0x7f05000c;
+        public static final int add_page=0x7f05001e;
+        public static final int checkbox_ShowArchives=0x7f050018;
         public static final int colorline=0x7f050005;
+        public static final int confession_list=0x7f050012;
         public static final int container=0x7f050002;
-        public static final int content=0x7f050012;
-        public static final int content_cat=0x7f050009;
-        public static final int content_frame=0x7f050011;
-        public static final int content_loc=0x7f05000c;
-        public static final int content_main=0x7f05000f;
-        public static final int delete_button=0x7f050013;
+        public static final int content=0x7f050014;
+        public static final int content_cat=0x7f05000a;
+        public static final int content_frame=0x7f050013;
+        public static final int content_loc=0x7f05000d;
+        public static final int content_main=0x7f050010;
+        public static final int delete_button=0x7f050015;
         public static final int drawer_layout=0x7f050003;
-        public static final int filter_cat=0x7f05000a;
-        public static final int filter_loc=0x7f05000d;
-        public static final int filter_main=0x7f050010;
-        public static final int locations=0x7f05000e;
-        public static final int navigation_drawer=0x7f050008;
-        public static final int pager=0x7f050007;
-        public static final int random=0x7f050018;
-        public static final int remove_page=0x7f05001a;
-        public static final int row_confession=0x7f050014;
+        public static final int filter_cat=0x7f05000b;
+        public static final int filter_loc=0x7f05000e;
+        public static final int filter_main=0x7f050011;
+        public static final int locations=0x7f05000f;
+        public static final int navigation_drawer=0x7f050007;
+        public static final int new_confession=0x7f050009;
+        public static final int pager=0x7f050006;
+        public static final int random=0x7f05001d;
+        public static final int remove_page=0x7f05001f;
+        public static final int row_confession=0x7f050016;
+        public static final int spinner=0x7f050008;
+        public static final int spinner_lang=0x7f050019;
         public static final int swipey_tabs=0x7f050004;
     }
     public static final class integer {
@@ -239,15 +247,18 @@ containing a value of this type.
         public static final int activity_layout_changes=0x7f030001;
         public static final int activity_main=0x7f030002;
         public static final int activity_screen_slide=0x7f030003;
-        public static final int fragment_category_screen_slide_page=0x7f030004;
-        public static final int fragment_location_screen_slide_page=0x7f030005;
-        public static final int fragment_main=0x7f030006;
-        public static final int fragment_main_screen_slide_page=0x7f030007;
-        public static final int fragment_navigation_drawer=0x7f030008;
-        public static final int fragment_screen_slide_page=0x7f030009;
-        public static final int list_item_example=0x7f03000a;
-        public static final int row_confession=0x7f03000b;
-        public static final int tab_swipey=0x7f03000c;
+        public static final int compose_activity_main=0x7f030004;
+        public static final int confession_list_item_example=0x7f030005;
+        public static final int fragment_category_screen_slide_page=0x7f030006;
+        public static final int fragment_location_screen_slide_page=0x7f030007;
+        public static final int fragment_main=0x7f030008;
+        public static final int fragment_main_screen_slide_page=0x7f030009;
+        public static final int fragment_navigation_drawer=0x7f03000a;
+        public static final int fragment_screen_slide_page=0x7f03000b;
+        public static final int list_item_example=0x7f03000c;
+        public static final int row_confession=0x7f03000d;
+        public static final int setting_activity_main=0x7f03000e;
+        public static final int tab_swipey=0x7f03000f;
     }
     public static final class menu {
         public static final int global=0x7f0b0000;

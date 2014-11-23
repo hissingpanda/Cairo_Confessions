@@ -46,6 +46,7 @@
     <color name="guilt">#05573A</color>
     <color name="dream">#09D3DE</color>
     <color name="fantasy">#FF0095</color>
+    <color name="confession">#222222</color>
     <string-array name="countries_array">
         <item>Afghanistan</item>
         <item>Albania</item>
@@ -55,5 +56,17 @@
         <item>Angola</item>
         <item>Anguilla</item>
         <item>Antarctica</item>
+    </string-array>
+    <string-array name="cat_array">
+        <item>Love</item>
+        <item>Pain</item>
+        <item>Guilt</item>
+        <item>Dream</item>
+        <item>Fanatasy</item>
+    </string-array>
+        <string-array name="lang_array">
+        <item>English</item>
+        <item>Arabic</item>
+        <item>3rabi</item>
     </string-array>
 </resources>
