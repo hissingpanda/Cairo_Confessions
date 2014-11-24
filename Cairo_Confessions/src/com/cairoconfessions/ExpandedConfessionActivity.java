@@ -45,32 +45,34 @@ public class ExpandedConfessionActivity extends FragmentActivity
   		getActionBar().setTitle("Cairo Confessions");
 
   		EditText editText = (EditText) findViewById(R.id.reply);
-  		final TextView tx = new TextView(this);
+  	//	final TextView tx = new TextView(this);
   		editText.setOnEditorActionListener(new OnEditorActionListener() {
   		    @Override
   		    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
   		        boolean handled = false;
-  				//Intent intent = getIntent();
+  				Intent intent = getIntent();
   		        if (actionId == EditorInfo.IME_ACTION_SEND) {
-  		            sendMessage(tx);
+  		            sendMessage();
   		        	//EditText comment = (EditText) findViewById(R.id.reply);
   		        	//String message = comment.getText().toString();
   		          	//intent.putExtra("result", message);
-  		            //setResult(1,intent);
+  		            setResult(1,intent);
   		            handled = true;
   		        }
   		        return handled;
   		    }
 
-			private void sendMessage(TextView tx) {
-				 LinearLayout linLayout = (LinearLayout)findViewById(R.id.linlayout);
+			private void sendMessage() {
+				 LinearLayout linLayout = (LinearLayout)findViewById(R.id.linlayoutchild);
+				 
+				 TextView tx = new TextView(ExpandedConfessionActivity.this);
 				 Intent intent = getIntent();
 			     EditText editText = (EditText) findViewById(R.id.reply);
 			     String message = editText.getText().toString();
 			     intent.putExtra("Result", message);
 			     setResult(1,intent);
 			     tx.setText(message);
-			     tx.setGravity(Gravity.CENTER | Gravity.TOP);
+			     tx.setGravity(Gravity.CENTER);
 			     /*
 	     			android:textSize="18sp"
 	    	        android:typeface="serif"
@@ -83,7 +85,10 @@ public class ExpandedConfessionActivity extends FragmentActivity
 			     
 			     tx.setLayoutParams(new LayoutParams(
 			     		 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+			     tx.getLayoutParams().height = 180; //close to 100dp
+			     
 			     linLayout.addView(tx);
+			     editText.setText("");
 				
 			}
   		});      	
