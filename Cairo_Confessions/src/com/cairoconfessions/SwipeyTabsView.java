@@ -458,9 +458,6 @@ public class SwipeyTabsView extends RelativeLayout implements
 				InputMethodManager imm = (InputMethodManager) getContext()
 						.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(this.getWindowToken(), 0);
-				if (findViewById(R.id.addLocation) != null)
-					((AutoCompleteTextView) findViewById(R.id.addLocation))
-							.setCursorVisible(false);
 			}
 		}
 	}

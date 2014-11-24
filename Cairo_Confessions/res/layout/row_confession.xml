@@ -15,32 +15,51 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:showDividers="middle"
-    android:divider="?android:dividerVertical"
-    android:dividerPadding="8dp"
-    android:gravity="center">
-<LinearLayout
+    android:id="@+id/linlayout"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/border"
-    android:orientation="horizontal"
-    android:layout_margin="1dp">
-    <!-- Dummy text view that will display the name of a random country. -->
-    <ListView android:id="@android:id/list"
-        style="?android:textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="194dp"
-        android:layout_weight="1"
+        android:animateLayoutChanges="true">
+    <TextView android:id="@android:id/text2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:ems="10" 
+        android:layout_weight="1"
         android:textSize="24sp"
         android:typeface="serif"
-        android:textColor="#222222"
+        android:textColor="@color/confession"
         android:textStyle="normal" 
         android:text= "I’ve been living all my life abroad and I regret everything."
         android:background="@drawable/bluebk" />
-</LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:typeface="serif"
+        android:textColor="@color/confession"
+        android:textStyle="normal" 
+        android:text= "What's going on?" 
+        android:background="@drawable/back"/>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:typeface="serif"
+        android:textColor="@color/confession"
+        android:textStyle="normal" 
+        android:text= "I felt the exact same last year, it gets better!" 
+        android:background="@drawable/back"/>
+    <EditText
+    android:id="@+id/reply"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:lines="2"
+    android:hint="Reply..."
+    android:inputType="text"
+    android:imeOptions="actionSend" />
+
 </LinearLayout>
