@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ConfessionListActivity"
+            android:name=".ExpandedConfessionActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

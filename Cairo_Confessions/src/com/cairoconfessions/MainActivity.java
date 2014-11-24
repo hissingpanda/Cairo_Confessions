@@ -20,10 +20,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -36,12 +40,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,11 +84,35 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
-		mTitle = getTitle();
+		mTitle = "Cairo Confessions";
+		getActionBar().setTitle("Cairo Confessions");
 
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
+//<<<<<<< HEAD
+
+		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
+	      //  startActivity(intent);
+		
+		//FragmentManager fm = getSupportFragmentManager();  
+		/*  
+		  if (fm.findFragmentById(android.R.id.content) == null) {  
+		   ConfessionListFragment list = new ConfessionListFragment();  
+		   fm.beginTransaction().add(android.R.id.content, list).commit();  
+		  }*/  
+/*
+		Fragment list_fragment = new ConfessionListFragment();
+
+		FragmentTransaction fm = getSupportFragmentManager().beginTransaction().add(android.R.id.content, list_fragment);
+		//fm.replace(R.id.content, list_fragment);
+		fm.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		fm.commit();
+		fm.hide(list_fragment);
+		*/
+//=======
+
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -102,7 +133,7 @@ public class MainActivity extends FragmentActivity implements
 				imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
 				((AutoCompleteTextView) findViewById(R.id.addLocation)).setCursorVisible(false);
 			}
-		});*/
+		});*/		
 
 	}
 
@@ -147,7 +178,18 @@ public class MainActivity extends FragmentActivity implements
 			Toast.makeText(this, "Invalid location", Toast.LENGTH_LONG).show();
 		}
 	}
-
+	
+	public void expandItem(View view) {
+			TextView tx = (TextView) findViewById(R.id.text_main); //content_main?
+			tx.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View v){
+					Intent mainIntent = new Intent(MainActivity.this, ExpandedConfessionActivity.class );
+					startActivity(mainIntent);
+				}
+			});			
+	};
+		
 	public void addItem(View view) {
 		// Instantiate a new "row" view.
 		final ViewGroup mFilter = (ViewGroup) findViewById(R.id.filter_cat);
@@ -160,8 +202,10 @@ public class MainActivity extends FragmentActivity implements
 		final ViewGroup newViewMain = (ViewGroup) LayoutInflater.from(this)
 				.inflate(R.layout.list_item_example, null);
 		ArrayList<View> presentView = new ArrayList<View>();
-		mFilter.findViewsWithText(presentView, ((TextView) view).getText(), 1);
-		if (presentView.size() == 0) {
+
+		mFilter.findViewsWithText(presentView, ((TextView) view).getText(),1);
+		
+		if (presentView.size()==0) {
 			// Set the text in the new row to a random country.
 			((TextView) newView.findViewById(android.R.id.text1))
 					.setText(((TextView) view).getText());
@@ -171,6 +215,7 @@ public class MainActivity extends FragmentActivity implements
 					.setText(((TextView) view).getText());
 			// Set a click listener for the "X" button in the row that will
 			// remove the row.
+			
 			newView.findViewById(R.id.delete_button).setOnClickListener(
 					new View.OnClickListener() {
 						@Override
@@ -223,6 +268,7 @@ public class MainActivity extends FragmentActivity implements
 							}
 						}
 					});
+	
 			// Because mFilter has android:animateLayoutChanges set to true,
 			// adding this view is automatically animated.
 			// mFilterCat.addView(newViewCat);
@@ -232,22 +278,34 @@ public class MainActivity extends FragmentActivity implements
 			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_main).setVisibility(View.VISIBLE);
+			
 		}else Toast.makeText(this, "Already added!", Toast.LENGTH_LONG).show();
 	}
 
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
+				/*
+<<<<<<< HEAD
+				//should be content_frame
+				.replace(R.id.container,
+=======
+*/
 				.replace(R.id.pager,
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
-
+	
+	
+	
 	public void onSectionAttached(int number) {
+		//Intent intent;
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_section1);
+			mTitle = "Feed";
+			//intent = new Intent(MainActivity.this, ConfessionListActivity.class);
+	        //startActivity(intent);
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
@@ -257,6 +315,14 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		}
 	}
+	/*
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    MenuItem item= menu.findItem(R.id.menu_settings);
+	    item.setVisible(true);
+	    super.onPrepareOptionsMenu(menu);
+	}
+	*/
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
@@ -319,7 +385,7 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.row_confession, container,
 					false);
 
 			return rootView;
