@@ -42,8 +42,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ConfessionListActivity"
-            android:label="@string/app_name" >
+            android:name=".ExpandedConfessionActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.cairoconfessions.MainActivity" >
+            <meta-data
+		      android:name="android.support.PARENT_ACTIVITY"
+		      android:value="com.cairoconfessions.MainActivity" />
+        </activity>
+		<activity
+            android:name=".ComposeActivity"
+            android:label="@string/app_name"
+        	android:parentActivityName="com.cairoconfessions.MainActivity" >
+            <meta-data
+		      android:name="android.support.PARENT_ACTIVITY"
+		      android:value="com.cairoconfessions.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/app_name"
+        	android:parentActivityName="com.cairoconfessions.MainActivity" >
+            <meta-data
+		      android:name="android.support.PARENT_ACTIVITY"
+		      android:value="com.cairoconfessions.MainActivity" />
         </activity>
     </application>
 

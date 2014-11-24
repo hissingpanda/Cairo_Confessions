@@ -17,7 +17,9 @@
 package com.cairoconfessions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import android.animation.LayoutTransition;
 import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,18 +29,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * The launchpad activity for this sample project. This activity launches other
@@ -62,12 +80,14 @@ public class MainActivity extends FragmentActivity implements
 	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
 	private PagerAdapter mPagerAdapter;
+	private ArrayAdapter<String> adapter;
+	private SwipeyTabsView mSwipeyTabs;
+	private TabsAdapter mSwipeyTabsAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = "Cairo Confessions";
@@ -104,47 +124,82 @@ public class MainActivity extends FragmentActivity implements
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
 		mPager.setCurrentItem(1);
-
-		//fm.show(list_fragment);
+		mPager.setPageMargin(1);
 		mPager.setOffscreenPageLimit(2);
-		/*
-		 * mPager.setOnPageChangeListener(new
-		 * ViewPager.SimpleOnPageChangeListener() {
-		 * 
-		 * @Override public void onPageSelected(int position) { // When changing
-		 * pages, reset the action bar actions since they are dependent // on
-		 * which page is currently active. An alternative approach is to have
-		 * each // fragment expose actions itself (rather than the activity
-		 * exposing actions), // but for simplicity, the activity provides the
-		 * actions in this sample. invalidateOptionsMenu(); } });
-		 */
-	}
-	public ArrayList<View> mFilters = new ArrayList<View>();
+		COUNTRIES = getResources().getStringArray(R.array.countries_array);
+		mSwipeyTabs = (SwipeyTabsView) findViewById(R.id.swipey_tabs);
+		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this);
+		mSwipeyTabs.setAdapter(mSwipeyTabsAdapter);
+		mSwipeyTabs.setViewPager(mPager);
 
-/*	public void addItems() {
-		ArrayList<View> presentView = new ArrayList<View>();
-		final ViewGroup mFilter = (ViewGroup)findViewById(R.id.filter_cat);
-		for(int i=0; i<mFilters.size();i++){
-			final ViewGroup newView = (ViewGroup) mFilters.get(i);
-			mFilter.findViewsWithText(presentView, ((TextView) newView.findViewById(android.R.id.text1)).getText(),1);
-			if(mFilter != null && presentView.size()==0){
-				((ViewGroup) newView.getParent()).removeView(newView);
-				mFilter.addView(newView);
-				newView.findViewById(R.id.delete_button).setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							mFilter.removeView(newView);
-			//				mFilterMain.removeView(newView);
-						}
-					});
+		/*mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
+				((AutoCompleteTextView) findViewById(R.id.addLocation)).setCursorVisible(false);
 			}
+		});*/		
+
+	}
+
+	private String[] COUNTRIES;
+
+	public void addLocation(View view) {
+		TextView newView = new TextView(this);
+		AutoCompleteTextView addLoc = ((AutoCompleteTextView) findViewById(R.id.addLocation));
+		String newLoc = addLoc.getText().toString();
+		ViewGroup locList = ((ViewGroup) findViewById(R.id.locations));
+		boolean notFound = true;
+		for (int i = 0; i < locList.getChildCount(); ++i) {
+			if (newLoc.equals(((TextView) locList.getChildAt(i)).getText()
+					.toString()))
+				notFound = false;
+			break;
 		}
-	}*/
+		if (Arrays.asList(COUNTRIES).contains(newLoc) && notFound) {
+			newView.setText(newLoc);
+			newView.setClickable(true);
+			newView.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {
+					addItem(view);
+				}
+			});
+			float scale = getResources().getDisplayMetrics().density;
+			newView.setGravity(17);
+			newView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+			newView.setBackgroundColor(Color.RED);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, (int) (80 * scale));
+			lp.setMargins((int) (3 * scale), (int) (3 * scale),
+					(int) (3 * scale), (int) (3 * scale));
+			newView.setLayoutParams(lp);
+			locList.addView(newView, 0);
+			addLoc.setText("");
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(addLoc.getWindowToken(), 0);
+			addLoc.setCursorVisible(false);
+
+		} else {
+			Toast.makeText(this, "Invalid location", Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	public void expandItem(View view) {
+			TextView tx = (TextView) findViewById(R.id.text_main); //content_main?
+			//tx.setOnClickListener(new OnClickListener(){
+				//@Override
+				//public void onClick(View v){
+					Intent mainIntent = new Intent(MainActivity.this, ExpandedConfessionActivity.class );
+					startActivity(mainIntent);
+				//}
+			//});			
+	};
+		
 	public void addItem(View view) {
 		// Instantiate a new "row" view.
-		final ViewGroup mFilter = (ViewGroup)findViewById(R.id.filter_cat);
-		final ViewGroup mFilterLoc = (ViewGroup)findViewById(R.id.filter_loc);
+		final ViewGroup mFilter = (ViewGroup) findViewById(R.id.filter_cat);
+		final ViewGroup mFilterLoc = (ViewGroup) findViewById(R.id.filter_loc);
 		final ViewGroup mFilterMain = (ViewGroup) findViewById(R.id.filter_main);
 		final ViewGroup newView = (ViewGroup) LayoutInflater.from(this)
 				.inflate(R.layout.list_item_example, null);
@@ -153,6 +208,7 @@ public class MainActivity extends FragmentActivity implements
 		final ViewGroup newViewMain = (ViewGroup) LayoutInflater.from(this)
 				.inflate(R.layout.list_item_example, null);
 		ArrayList<View> presentView = new ArrayList<View>();
+
 		mFilter.findViewsWithText(presentView, ((TextView) view).getText(),1);
 		
 		if (presentView.size()==0) {
@@ -160,9 +216,9 @@ public class MainActivity extends FragmentActivity implements
 			((TextView) newView.findViewById(android.R.id.text1))
 					.setText(((TextView) view).getText());
 			((TextView) newViewLoc.findViewById(android.R.id.text1))
-				.setText(((TextView) view).getText());
+					.setText(((TextView) view).getText());
 			((TextView) newViewMain.findViewById(android.R.id.text1))
-				.setText(((TextView) view).getText());
+					.setText(((TextView) view).getText());
 			// Set a click listener for the "X" button in the row that will
 			// remove the row.
 			
@@ -174,10 +230,13 @@ public class MainActivity extends FragmentActivity implements
 							mFilterLoc.removeView(newViewLoc);
 							mFilterMain.removeView(newViewMain);
 							if (mFilter.getChildCount() == 0) {
-			                    findViewById(R.id.content_loc).setVisibility(View.GONE);
-			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
-			                    findViewById(R.id.content_main).setVisibility(View.GONE);
-			                }
+								findViewById(R.id.content_loc).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_cat).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_main).setVisibility(
+										View.GONE);
+							}
 						}
 					});
 			newViewLoc.findViewById(R.id.delete_button).setOnClickListener(
@@ -188,12 +247,15 @@ public class MainActivity extends FragmentActivity implements
 							mFilter.removeView(newView);
 							mFilterMain.removeView(newViewMain);
 							if (mFilterLoc.getChildCount() == 0) {
-								findViewById(R.id.content_loc).setVisibility(View.GONE);
-			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
-			                    findViewById(R.id.content_main).setVisibility(View.GONE);
-			                }
+								findViewById(R.id.content_loc).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_cat).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_main).setVisibility(
+										View.GONE);
+							}
 						}
-						
+
 					});
 			newViewMain.findViewById(R.id.delete_button).setOnClickListener(
 					new View.OnClickListener() {
@@ -203,24 +265,27 @@ public class MainActivity extends FragmentActivity implements
 							mFilter.removeView(newView);
 							mFilterMain.removeView(newViewMain);
 							if (mFilterMain.getChildCount() == 0) {
-								findViewById(R.id.content_loc).setVisibility(View.GONE);
-			                    findViewById(R.id.content_cat).setVisibility(View.GONE);
-			                    findViewById(R.id.content_main).setVisibility(View.GONE);
-			                }
+								findViewById(R.id.content_loc).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_cat).setVisibility(
+										View.GONE);
+								findViewById(R.id.content_main).setVisibility(
+										View.GONE);
+							}
 						}
 					});
 	
 			// Because mFilter has android:animateLayoutChanges set to true,
 			// adding this view is automatically animated.
-			//mFilterCat.addView(newViewCat);
-			mFilters.add(newView);
-			mFilter.addView(newView);
-			mFilterLoc.addView(newViewLoc);
-			mFilterMain.addView(newViewMain);
+			// mFilterCat.addView(newViewCat);
+			mFilter.addView(newView,0);
+			mFilterLoc.addView(newViewLoc,0);
+			mFilterMain.addView(newViewMain,0);
 			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
-            findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
-            findViewById(R.id.content_main).setVisibility(View.VISIBLE);
-        }
+			findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
+			findViewById(R.id.content_main).setVisibility(View.VISIBLE);
+			
+		}else Toast.makeText(this, "Already added!", Toast.LENGTH_LONG).show();
 	}
 
 	public void onNavigationDrawerItemSelected(int position) {
@@ -237,7 +302,9 @@ public class MainActivity extends FragmentActivity implements
 				.replace(R.id.pager,
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
-
+	
+	
+	
 	public void onSectionAttached(int number) {
 		//Intent intent;
 		switch (number) {
@@ -252,6 +319,10 @@ public class MainActivity extends FragmentActivity implements
 		case 3:
 			mTitle = getString(R.string.title_section3);
 			break;
+		case 4:
+			getSettings();
+			break;
+		
 		}
 	}
 	/*
@@ -262,7 +333,12 @@ public class MainActivity extends FragmentActivity implements
 	    super.onPrepareOptionsMenu(menu);
 	}
 	*/
-
+	public void getSettings(){
+			Intent intent;
+			intent = new Intent(this, SettingActivity.class);
+			startActivityForResult(intent, 1);
+	
+	}
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -284,7 +360,39 @@ public class MainActivity extends FragmentActivity implements
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
+	public void sendMessage() {
+		Intent intent;
+		intent = new Intent(this, ComposeActivity.class);
+		startActivityForResult(intent, 1);
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 1) {
+			String confession = data.getExtras().get("result").toString();
+			TextView newConfess = new TextView(this);
+			newConfess.setText(confession);
+			final float scale = getResources().getDisplayMetrics().density;
+			newConfess.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,((int)(scale*194+0.5f))));
+			newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			newConfess.setGravity(Gravity.CENTER);
+			newConfess.setEllipsize(TextUtils.TruncateAt.END);
+			newConfess.setBackgroundResource(R.drawable.bluebk);
+			newConfess.setTypeface(Typeface.SERIF,Typeface.NORMAL);
+			newConfess.setEms(10);
+			newConfess.setMaxLines(3);
+			Animation fadeIn = new AlphaAnimation(0, 1);
+		    fadeIn.setDuration(1000);
+		    newConfess.setAnimation(fadeIn);
+			((LinearLayout)findViewById(R.id.confession_list)).addView(newConfess,0);
+			mPager.setCurrentItem(1);
+		}
 
+	}
+	public void restoreCursor(){
+		((AutoCompleteTextView) findViewById(R.id.addLocation))
+		.setCursorVisible(true);
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -292,6 +400,10 @@ public class MainActivity extends FragmentActivity implements
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if (id == R.id.action_example) {
+			sendMessage();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -326,6 +438,7 @@ public class MainActivity extends FragmentActivity implements
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.row_confession, container,
 					false);
+
 			return rootView;
 		}
 
@@ -348,7 +461,6 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public android.support.v4.app.Fragment getItem(int position) {
-			//addItems();
 			return ScreenSlidePageFragment.create(position);
 		}
 

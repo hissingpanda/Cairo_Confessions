@@ -1,6 +1,5 @@
-/*
- * Copyright 2012 The Android Open Source Project
- *
+/* Copyright 2012 The Android Open Source Project
+ *  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,84 +15,104 @@
 
 package com.cairoconfessions;
 
-
-
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
-import com.cairoconfessions.MainActivity;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 /**
- * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
- * the page number, along with some dummy text.
- *
- * <p>This class is used by the {@link CardFlipActivity} and {@link
- * ScreenSlideActivity} samples.</p>
+ * A fragment representing a single step in a wizard. The fragment shows a dummy
+ * title indicating the page number, along with some dummy text.
+ * 
+ * <p>
+ * This class is used by the {@link CardFlipActivity} and
+ * {@link ScreenSlideActivity} samples.
+ * </p>
  */
 public class ScreenSlidePageFragment extends android.support.v4.app.Fragment {
-    /**
-     * The argument key for the page number this fragment represents.
-     */
-    public static final String ARG_PAGE = "page";
+	/**
+	 * The argument key for the page number this fragment represents.
+	 */
+	public static final String ARG_PAGE = "page";
 
-    /**
-     * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
-     */
-    private int mPageNumber;
+	/**
+	 * The fragment's page number, which is set to the argument value for
+	 * {@link #ARG_PAGE}.
+	 */
+	private int mPageNumber;
+	private ArrayAdapter<String> adapter;
+	private String[] COUNTRIES;
 
-    /**
-     * Factory method for this fragment class. Constructs a new fragment for the given page number.
-     */
-    public static ScreenSlidePageFragment create(int pageNumber) {
-        ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
+	/**
+	 * Factory method for this fragment class. Constructs a new fragment for the
+	 * given page number.
+	 */
+	public static ScreenSlidePageFragment create(int pageNumber) {
+		ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARG_PAGE, pageNumber);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    public ScreenSlidePageFragment() {
-    }
+	public ScreenSlidePageFragment() {
+	}
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mPageNumber = getArguments().getInt(ARG_PAGE);
+		COUNTRIES = getResources().getStringArray(R.array.countries_array);
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        // Inflate the layout containing a title and body text.
-    	ViewGroup rootView;
-    	 switch(mPageNumber){
-    	 case 0:
-    		 rootView = (ViewGroup) inflater
-    		 .inflate(R.layout.fragment_location_screen_slide_page, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// Inflate the layout containing a title and body text.
+		ViewGroup rootView;
+		switch (mPageNumber) {
+		case 0:
+			rootView = (ViewGroup) inflater.inflate(
+					R.layout.fragment_location_screen_slide_page, container,
+					false);
+			adapter = new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+			adapter.setNotifyOnChange(true);
+			AutoCompleteTextView textView = (AutoCompleteTextView) rootView
+					.findViewById(R.id.addLocation);
+			textView.setAdapter(adapter);
+			break;
+		case 1:
+			rootView = (ViewGroup) inflater.inflate(
+					R.layout.fragment_main_screen_slide_page, container, false);
 
-    		 break;
-    	 case 1:
-    		 rootView = (ViewGroup) inflater
-    		 .inflate(R.layout.fragment_main_screen_slide_page, container, false);
+			break;
+		case 2:
+			rootView = (ViewGroup) inflater.inflate(
+					R.layout.fragment_category_screen_slide_page, container,
+					false);
 
-    		 break;
-    	 case 2:
-    		 rootView = (ViewGroup) inflater
-    		 .inflate(R.layout.fragment_category_screen_slide_page, container, false);
+			break;
+		default:
+			rootView = (ViewGroup) inflater.inflate(
+					R.layout.fragment_screen_slide_page, container, false);
+		}
+		return rootView;
+	}
 
-    		 break;
-    	 default: rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page, container, false);
-    	 }
-        
-        return rootView;
-    }
 
-    /**
-     * Returns the page number represented by this fragment object.
-     */
-    public int getPageNumber() {
-        return mPageNumber;
-    }
+
+	/**
+	 * Returns the page number represented by this fragment object.
+	 */
+	public int getPageNumber() {
+		return mPageNumber;
+	}
+
 }

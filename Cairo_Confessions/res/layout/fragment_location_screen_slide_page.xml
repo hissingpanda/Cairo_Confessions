@@ -11,99 +11,131 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
+  limitations under the License.-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-<LinearLayout
-  	android:visibility="gone"
-    android:id="@+id/content_loc"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@drawable/border">
-	<TextView 
-        style="?android:textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-    	android:layout_margin="2dp"
-    	android:text="Filters:"
-        android:textSize="18sp" />
-    <!-- A vertical LinearLayout in a ScrollView. This emulates a ListView (and is lighter weight
-         than a ListView when there aren't many rows). -->
-    <ScrollView android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="50dp"
-    	android:fadeScrollbars="false">
-
-        <!-- Note that this LinearLayout has the "animateLayoutChanges" property set to true.
-             This tells the framework to automatically animate child views (in this case, rows)
-             as they are added to and removed from the LinearLayout. -->
-        <GridLayout android:id="@+id/filter_loc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:columnCount="4"
-            android:rowCount="2"
-            android:showDividers="middle"
-            android:divider="?android:dividerHorizontal"
-            android:animateLayoutChanges="true"
-            android:padding="1dp" />
-
-    </ScrollView>
-
-
-</LinearLayout>
-    
-    <!-- Dummy content. -->
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="16dp" >
+        android:layout_height="50dp" >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="3dp"
-            android:onClick="addItem"
-            android:clickable="true"
-            android:tag="Riyadh"
-            android:background="@color/love"
-            android:gravity="center"
-            android:text="Riyadh"
-            android:textSize="30sp" />
+        <AutoCompleteTextView
+            android:id="@+id/addLocation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:completionThreshold="1"
+            android:focusable="true"
+			android:focusableInTouchMode="true"
+            android:hint="Add location" />
 
-        <TextView
-            style="?android:textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="3dp"
-            android:onClick="addItem"
-            android:clickable="true"
-            android:tag="Cairo"
-            android:background="@color/pain"
-            android:gravity="center"
-            android:text="Cairo"
-            android:textSize="30sp" />
-
-        <TextView
-            style="?android:textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="3dp"
-            android:onClick="addItem"
-            android:clickable="true"
-            android:tag="New York"
-            android:background="@color/guilt"
-            android:gravity="center"
-            android:text="New York"
-            android:textSize="30sp" />
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addLocation"
+            android:text="Add" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/content_loc"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/border"
+        android:visibility="gone"
+        android:layout_margin="3dp" >
+
+        <TextView
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:text="Filters:"
+    		android:gravity="center"
+            android:textSize="16sp" />
+        <!--
+         A vertical LinearLayout in a ScrollView. This emulates a ListView (and is lighter weight
+         than a ListView when there aren't many rows).
+        -->
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fadeScrollbars="false" >
+
+            <!--
+             Note that this LinearLayout has the "animateLayoutChanges" property set to true.
+             This tells the framework to automatically animate child views (in this case, rows)
+             as they are added to and removed from the LinearLayout.
+            -->
+
+            <GridLayout
+                android:id="@+id/filter_loc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:columnCount="4"
+                android:divider="?android:dividerHorizontal"
+                android:orientation="horizontal"
+                android:padding="1dp"
+                android:rowCount="2"
+                android:showDividers="middle" />
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Dummy content. -->
+	<ScrollView 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false" >
+	    <LinearLayout
+	        android:id="@+id/locations"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:orientation="vertical"
+	        android:padding="6dp" >
+	
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="80dp"
+	            android:layout_margin="3dp"
+	            android:background="@color/love"
+	            android:clickable="true"
+	            android:gravity="center"
+	            android:onClick="addItem"
+	            android:tag="Riyadh"
+	            android:text="Riyadh"
+	            android:textSize="30sp" />
+	
+	        <TextView
+	            style="?android:textAppearanceMedium"
+	            android:layout_width="match_parent"
+	            android:layout_height="80dp"
+	            android:layout_margin="3dp"
+	            android:background="@color/pain"
+	            android:clickable="true"
+	            android:gravity="center"
+	            android:onClick="addItem"
+	            android:tag="Cairo"
+	            android:text="Cairo"
+	            android:textSize="30sp" />
+	
+	        <TextView
+	            style="?android:textAppearanceMedium"
+	            android:layout_width="match_parent"
+	            android:layout_height="80dp"
+	            android:layout_margin="3dp"
+	            android:background="@color/guilt"
+	            android:clickable="true"
+	            android:gravity="center"
+	            android:onClick="addItem"
+	            android:tag="New York"
+	            android:text="New York"
+	            android:textSize="30sp" />
+	    </LinearLayout>
+	</ScrollView>
 </LinearLayout>

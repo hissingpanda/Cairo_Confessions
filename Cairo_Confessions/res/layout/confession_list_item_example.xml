@@ -14,12 +14,16 @@
   limitations under the License.
   -->
 
-<resources>
-    <style name="DarkTheme" parent="android:Theme.Holo">
-        <item name="android:actionBarStyle">@style/DarkActionBar</item>
-    </style>
-
-    <style name="DarkActionBar" parent="android:Widget.Holo.ActionBar">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-</resources>
+ <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="194dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="3"
+        android:ems="10" 
+        android:textSize="24sp"
+        android:typeface="serif"
+        android:textColor="@color/confession"
+        android:textStyle="normal" 
+        android:background="@drawable/bluebk"
+        android:ellipsize="end" />
