@@ -11,11 +11,12 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
+  limitations under the License.
+-->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
- <string name="title_section1">Notifications</string>
+
+    <string name="title_section1">Notifications</string>
     <string name="title_section2">Followers</string>
     <string name="title_section3">Messages</string>
     <string name="title_section4">Settings</string>
@@ -29,24 +30,29 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_display_message">My Message</string>
     <string name="hello_world">Hello world!</string>
-    
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
     <!-- Titles -->
     <string name="app_name">Cario Confessions</string>
 
     <!-- Actions -->
-    
+
     <string name="action_remove_item">Remove item</string>
     <!-- Messages -->
     <!-- Accessibility-only descriptions -->
     <!-- Other strings -->
     <string name="lorem_ipsum"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
-	<string name="lorem_ipsum_main"><![CDATA[Main\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
-    <color name="love">#EB0E0E</color>
-    <color name="pain">#530769</color>
-    <color name="guilt">#05573A</color>
-    <color name="dream">#09D3DE</color>
-    <color name="fantasy">#FF0095</color>
+    <string name="lorem_ipsum_main"><![CDATA[Main\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
+
+    <color name="love">#FF8585</color>
+    <color name="pain">#A062B3</color>
+    <color name="guilt">#52806F</color>
+    <color name="dream">#ADDEE0</color>
+    <color name="fantasy">#FF6BC2</color>
     <color name="confession">#222222</color>
+
     <string-array name="countries_array">
         <item>Afghanistan</item>
         <item>Albania</item>
@@ -64,9 +70,50 @@
         <item>Dream</item>
         <item>Fanatasy</item>
     </string-array>
-        <string-array name="lang_array">
+    <string-array name="lang_array">
         <item>English</item>
         <item>Arabic</item>
         <item>3rabi</item>
     </string-array>
+    <string-array name="report_choices">
+        <item>Abusive</item>
+        <item>Spam</item>
+        <item>Nonsensical</item>
+    </string-array>
+    
+    <string-array name="confession_array">
+        <item>"Is it weird to escape to a land of fantasy with your eyes wide open ? I feel the best surrounded by silence and then i can enter my own thoughts. In that place i can run perfect scenarios and say things i really can not say. Do things I'm not able to achieve yet, picture what i would be in a particular moment that i wished to be true but I know it would never happen. 
+Don't get me wrong, I am not ignoring reality and not trying to go for these dreams in reality. Although, they will never be as perfect as they are in my head. I am working on achieving my dreams and I feel like i need to keep reminding myself of the results to get where I desire. 
+
+Its just that in the past 3 years , i've dealt with so much trust issues and loss that I may feel a little numb towards people and the things i love the most... I got very depressed at a point and now everything is just calm and i'm trying to keep sadness to a limit. I refused to give in to the nothingness. 
+
+I'm a book worm , people tell me I\'m a good writer and photographer also got mad passion for anime. I try to be a best-friend that wouldn't put her family down. I'm also trying to be a better version of myself, letting go of habits that will weigh me down.
+
+I just felt like confessing i need more things to remind me to stay on track of my progress, but grateful for where i am. 
+
+Thank you for your precious time x "</item>
+        <item>"I've been with this guy for almost 2 years now, we are both 23 now, he loves me way too much and he never stops mentioning how lucky he is to have me. I fell for him at a time when I promised myself not to love and focus on my studies. He managed to make me break my promise. He is sweet, caring and kind. He's a little pushy when it comes to what he wants but I don't hate that about him, on the contrary. We never did anything wrong or Haram not even a touch. He asked me to marry him and I accepted. Then we decided to tell our parents. He told his parents about me first, they refused and told him he's too young to get married so we waited till he got a job and settled. He mentioned me one more time to his parents, they then said that I'm not religious enough for him. I'm actually more religious than he is but they don't know this because they've never met me. His father saw me twice and he never even talked to me. But they say I'm not as religious as his brother's wife. He fought for me for a while but they still refused. He asked me to meet my parents and told me that he doesn't care about what his parents think and that we should just go for it. I refused and told him we can wait till they are convinced. Six months later, his parents are pretending they forgot about me and trying to convince him to marry his sister in law's sister. Should I just ask him to talk to my parents and forget about his parents? I'm getting a few suitors and I keep refusing for no reason as I couldn't tell my parents about him, yet. What should I do?"</item>
+        <item>"هي الناس بتعمل إيه في الحياه ؟
+أنا معنديش هدف معين في الحياه حتى لما بحط لنفسي هدف بحس إنه هدف وهمي 
+بحاول أعرف من ساعة ما اتولدت أنا بحب إيه أو إيه الأنا كويسة فيه مش بلاقي إجابة 
+مرة في انترفيو إتسألت إيه الانجازات الأنا حققتها ملقتش حاجة أقلها وحاسة اني عايشة وخلاص 
+أنا مش شخصية كئيبة بالعكس أنا مرحة جداً وباخذ الأمور ببساطة بس نفسي ألاقي نفسي وأعمل حاجة مفيدة"</item>
+<item>I’ve been living all my life abroad and I regret everything.</item>
+<item>"hi ccians , first of all i want to talk about something i can't go with it and this is the first time for me to talk about it 
+iam a mechanical engineer my first year i never thought about gain money cars or anything , i just think about make people see me as a pacemaker . i want to help people as i get so emotional when i see a man in his 60's or a child has no food or shelter i want many things but i don't know how to start . this makes me tired everyday and end my day without doing anything except study and study and study i want to learn something new . dream of my life to be influential in lives of people !!
+
+thanks"</item>
+<item>"مساء الخير 
+انا بنت عندى 22 سنة .. مشكلتى بأختصار انى معنديش صحاب ولا اخوات بنات ولا حتى قرايب فى عيلتى ممكن يكونو صحابي 
+بدرس online وبروح امتحن فالجامعة يعنى كمان مافيش صحاب فالجامعة .. وطبعا لسه ماشتغلتش .. ودى تانى سنة ليا فى مصر وكل صحابي اللى كنت اعرفهم مش فى مصر ومش مصريين 
+الفكرة انى مش عارفة ازاى اكون صحاب ومنين ؟؟ حتى لما برووح النادى او اعمل شوبنج او اروح اتغدى فى اى مطعم ببقي لواحدى او مع اهلى لو رضيو يخرجو .. ايه الحل ؟
+ياريت بلاش حلول اعملى نشاط اجتماعى وتطوعى والكلام دا عشان مش بحبه "</item>
+<item>"So last night my father was diagnosed with pancreatic cancer and his life expectancy 6 months at the best situation. I cried like never before, I fuckin cried for 12 hours straight. I asked god many times before to just make him disappear out of my life."" Ya tesh3'elo f ay haga ya ta5do ya rab"". 
+he is not the best father but I swear he's a good man. He did what he thought is the best of us. but of his life he wanted to die. He wasn't even living he's always feeling dead inside that he's useless , he has a negative spirit that affected me deeply.. that wasn't good enough for me or maybe my mom sat a great example of how a responsible loving parent should be. And now he's actually dying I feel nothing but guilt and misery like what the fuck was I thinking when my prayers were dedicated to my father's absence? Maybe god wanted to give him the closure he always wanted but in a very painful way? I'm avoiding him since yesterday and I don't want to get attached to him in his last days and I don't want to leave him in his last days and I DON'T WANT HIM TO DIE. I never wanted him to die but the words just came out of my mouth like it was impossible to happen. I'm sorry and I love you.
+your prayers please."</item>
+<item>"مش عارفة ارتب كلامي ولاابدأ بإيه، عندي ٢١ سنة، اللي تاعبني فحياتي اني بحس بالذنب بطريقة اوڤر من اقل حاجة بعملها يعني مثلاً لوكدبت ف حاجة بسيطة،لو جمعت صلوات،لو اخرت مذاكرة، لوصوتي علي عل صوت ماما من غير ماحس، اه دي حاجات غلط فعلا بس مش لدرجة اني احس بالذنب وعاقب نفسي بالطريقة اللي انا بعملها ف نفسي دي، اعصابي بتتعب وقلبي بيتقبض ويمسكني صداع وممكن نَفسي يضيق جدا، في حاجات تانية بتوصلني لأني أ-self harm لما بغلط فعلا وازعّل حد بحبه مني،كل ده ممكن نقول عادي طبيعي ازعل من نفسي اني زعلت حد بحبه وبيحبني، انما المشكلة اني احس بالذنب من اني اجرح حد معندوش دم حد جرحني وضايقني، يعني مثلاً وحدة صحبتي مرة ضايقتني وعملت مواقف زعلتني منها جدا لدرجة ان فمرة وحنا بتناقش جرحتني بكلامها وبسببها دخلت ف نوبة عياط وتشنجات فقت منها بصعوبة ورغم كدة فنفس اليوم بالليل فضلت ائنب نفسي واقول ياربي ممكن تكون هي مضايقة انها ضايقتني فمش هتعرف تذاكر، هتتضايق،اواو ... وافكر كدة كتير،ومواقف كتير اني لما بتخانق مع اي حد عموما حتى لو كان الطرف التاني هو ال غلطان بحس بالذنب انه ممكن تكون خناقتنا اثرت عل يومه مع ان ممكن يكون الطرف التاني ده مش متأثر ولا حاجة ولا عل باله اصلاً، ومعندوش اي مشكلة انه يجرحني،في حاجة تانية مش عارفة ابررها بإيه ان من ونا ف اعدادي تقريبا ونا كل مالدنيا تمطر او كل مرة بشوف فيها الشروق بعيط بحس ان في حاجة بتلمس روحي ببقى حاسة بحاجة غريبة بتخليني اعيط بس مش فاهمة ليه بالذات الحاجتين دول؟! ماما كانت تقولي لما تشوفني كدة اني حساسة زيادة عن اللزوم وان لازم اسيطر عل نفسي، انا عارفة اني ضعيفة و حساسة بطريقة تقرف، ساعات كتير بقرف من نفسي اني كدة، وساعات تانية بقول لا انا كدة كويسة اني مبحبش اجرح حد، بس كل ده تاعبني جداً وبياخد مني طاقة كبيررة اووي،و كل ده خلاني ابتدي انعزل عن الناس شوية بشوية ولما كنت ١٦ سنة تقريبا ابتديت اسطح علاقاتي واخاف اقرب من اي حد علشان اتجنب اي حاجة ممكن توجعني،عادي فالجامعة بهزر واضحك مع كل الناس بس من غير صداقات، اللي تاعبني اكتر دلوقتي انا ازاي ممكن احب حد واتجوزه واعيش معاه ف بيت واحد واضطر استحمل ان طبيعي هيحصل بينا خناقات وطبيعي هيبقى cruel شوية بحكم انه راجل، خصوصا ان في حد دلوقتي ابتدى يدخل حياتي وبيلمحلي انه بيحبني،حد مش قادرة اوصف هو بيرفكت ازاي والمصيبة دلوقتي اني حاسة اني ابتديت اتعلق بيه واحبه مش عارفة ازاي مقدرتش اسيطر عل نفسي،انا مبسوطة انه موجود فحياتي بس خايفة اكتر، انا عارفة نفسي لو كملت معاه فعلاً هخاف عليه بطريقة هتأذيني انا، هبقى طول الوقت خايفة ازعله واعصابي هتتعب، عارفة ان في ناس هترد بأنتي اوڤر بطلي نكد انتي دراما كوين بلابلابلا، الكلام ده مش هيأثر فيا عشان سمعته من ماما كتير ف ملهاش لازمة.."</item>
+<item>"My boyfriend is still hung up on his ex who also happens to be his best friend. he assures me that he's completely over her meanwhile we can't get through a single conversation without him mentioning her name. She was the one who broke up with him and she was the only one who dumped him instead of him dumping her so I'm assuming that was a shattering blow to his ego, but they're still best friends because they've been through hell and back together. I am a confident woman and I would never ask him to choose between us or stop talking to her but sometimes I wonder if he's just biding his time until his friend realizes that they belong together and then he'd have to dump me. I don't want to be around when that happens. I might sound like I'm exaggerating but trust me you guys, when someone so much as mentions her name he's immediately in a better mood and when he talks to her on the phone he's all giddy and his body language is different, women pick up on these things. These past few weeks were the best I've had and I really did fall for him which tempts me to stick around and see this through to the bitter end but I honestly don't think I can take it, not from him. 
+Thank you for reading and I appreciate any good advice that you might have."</item> 
+</string-array>
+
 </resources>

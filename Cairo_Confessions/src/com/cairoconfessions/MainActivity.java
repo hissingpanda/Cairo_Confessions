@@ -18,21 +18,22 @@ package com.cairoconfessions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import android.animation.LayoutTransition;
 import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.PaintDrawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -44,17 +45,17 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,7 +81,6 @@ public class MainActivity extends FragmentActivity implements
 	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
 	private PagerAdapter mPagerAdapter;
-	private ArrayAdapter<String> adapter;
 	private SwipeyTabsView mSwipeyTabs;
 	private TabsAdapter mSwipeyTabsAdapter;
 
@@ -97,27 +97,29 @@ public class MainActivity extends FragmentActivity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 
-//<<<<<<< HEAD
+		// <<<<<<< HEAD
 
-		//  Intent intent = new Intent(MainActivity.this, ConfessionListActivity.class);
-	      //  startActivity(intent);
-		
-		//FragmentManager fm = getSupportFragmentManager();  
-		/*  
-		  if (fm.findFragmentById(android.R.id.content) == null) {  
-		   ConfessionListFragment list = new ConfessionListFragment();  
-		   fm.beginTransaction().add(android.R.id.content, list).commit();  
-		  }*/  
-/*
-		Fragment list_fragment = new ConfessionListFragment();
+		// Intent intent = new Intent(MainActivity.this,
+		// ConfessionListActivity.class);
+		// startActivity(intent);
 
-		FragmentTransaction fm = getSupportFragmentManager().beginTransaction().add(android.R.id.content, list_fragment);
-		//fm.replace(R.id.content, list_fragment);
-		fm.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		fm.commit();
-		fm.hide(list_fragment);
-		*/
-//=======
+		// FragmentManager fm = getSupportFragmentManager();
+		/*
+		 * if (fm.findFragmentById(android.R.id.content) == null) {
+		 * ConfessionListFragment list = new ConfessionListFragment();
+		 * fm.beginTransaction().add(android.R.id.content, list).commit(); }
+		 */
+		/*
+		 * Fragment list_fragment = new ConfessionListFragment();
+		 * 
+		 * FragmentTransaction fm =
+		 * getSupportFragmentManager().beginTransaction(
+		 * ).add(android.R.id.content, list_fragment);
+		 * //fm.replace(R.id.content, list_fragment);
+		 * fm.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		 * fm.commit(); fm.hide(list_fragment);
+		 */
+		// =======
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
@@ -131,19 +133,101 @@ public class MainActivity extends FragmentActivity implements
 		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this);
 		mSwipeyTabs.setAdapter(mSwipeyTabsAdapter);
 		mSwipeyTabs.setViewPager(mPager);
-
-		/*mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
-				((AutoCompleteTextView) findViewById(R.id.addLocation)).setCursorVisible(false);
-			}
-		});*/		
+		Confessions = getResources().getStringArray(R.array.confession_array);
+		for (int i = 0; i < Confessions.length; i++)
+			addConfession(Confessions[i].toString());
+		/*
+		 * mPager.setOnPageChangeListener(new
+		 * ViewPager.SimpleOnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int position) {
+		 * InputMethodManager imm = (InputMethodManager)
+		 * getSystemService(Context.INPUT_METHOD_SERVICE);
+		 * imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
+		 * ((AutoCompleteTextView)
+		 * findViewById(R.id.addLocation)).setCursorVisible(false); } });
+		 */
 
 	}
 
-	private String[] COUNTRIES;
+	private String[] COUNTRIES, Confessions;
+
+	public void follow(View view) {
+		if (((TextView) view).getText().equals("Follow"))
+			((TextView) view).setText("Unfollow");
+		else
+			((TextView) view).setText("Follow");
+	}
+
+	public void sendShare(View view) {
+		Intent sendIntent = new Intent();
+		String shareMessage = ((TextView) ((LinearLayout) view.getParent()
+				.getParent()).findViewById(R.id.text_main)).getText()
+				.toString();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		shareMessage = "I would like to share this confession with you:\n\""
+				+ shareMessage + '"';
+		sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+		sendIntent.setType("text/plain");
+		startActivity(sendIntent);
+	}
+
+	public void report(View view) {
+
+		final EditText edit = new EditText(this);
+		final RadioGroup choices = new RadioGroup(this);
+		edit.setText("I would like to report this confession");
+		final String[] selectedItem = getResources().getStringArray(
+				R.array.report_choices);
+
+		for (int i = 0; i < selectedItem.length; i++) {
+			RadioButton choice = new RadioButton(this);
+			choice.setText(selectedItem[i]);
+			choices.addView(choice);
+		}
+		choices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// checkedId is the RadioButton selected
+				edit.setText("I would like to report this confession as "
+						+ ((RadioButton) group.findViewById(checkedId))
+								.getText().toString());
+
+			}
+		});
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(choices);
+		ll.addView(edit);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Choose which categories:")
+				.setView(ll)
+				.setPositiveButton(R.string.send,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked OK button
+								reportReceived();
+							}
+						})
+				.setNegativeButton(R.string.cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked Cancel button
+							}
+						}).show();
+	}
+
+	public void reportReceived() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setMessage("Your report was sent!")
+				.setPositiveButton(R.string.close,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked Close button
+							}
+						}).show();
+	}
 
 	public void addLocation(View view) {
 		TextView newView = new TextView(this);
@@ -151,7 +235,7 @@ public class MainActivity extends FragmentActivity implements
 		String newLoc = addLoc.getText().toString();
 		ViewGroup locList = ((ViewGroup) findViewById(R.id.locations));
 		boolean notFound = true;
-		for (int i = 0; i < locList.getChildCount(); ++i) {
+		for (int i = 0; i < locList.getChildCount(); i++) {
 			if (newLoc.equals(((TextView) locList.getChildAt(i)).getText()
 					.toString()))
 				notFound = false;
@@ -184,18 +268,89 @@ public class MainActivity extends FragmentActivity implements
 			Toast.makeText(this, "Invalid location", Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	public void expandItem(View view) {
-			TextView tx = (TextView) findViewById(R.id.text_main); //content_main?
-			//tx.setOnClickListener(new OnClickListener(){
-				//@Override
-				//public void onClick(View v){
-					Intent mainIntent = new Intent(MainActivity.this, ExpandedConfessionActivity.class );
-					startActivity(mainIntent);
-				//}
-			//});			
+
+		Intent mainIntent = new Intent(MainActivity.this,
+				ExpandedConfessionActivity.class);
+		mainIntent.putExtra("confession", ((TextView) view).getText()
+				.toString());
+		mainIntent.putExtra("category", ((LinearLayout)view.getParent().getParent()).getContentDescription().toString());
+		startActivity(mainIntent);
+
 	};
-		
+
+	private int rand = 0;
+	public void addConfession(String confess) {
+		final ViewGroup confession = (ViewGroup) LayoutInflater.from(this)
+				.inflate(R.layout.confession_list_item_example, null);
+		final TextView newConfess = (TextView) confession
+				.findViewById(R.id.text_main);
+		newConfess.setText(confess);
+		final float scale = getResources().getDisplayMetrics().density;
+		newConfess.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				((int) (scale * 194 + 0.5f))));
+		newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+		newConfess.setGravity(Gravity.CENTER);
+		newConfess.setEllipsize(TextUtils.TruncateAt.END);
+		switch (rand) {
+		case 0:
+			newConfess.setBackgroundResource(R.color.love);
+			confession.setContentDescription("Love");
+			break;
+		case 1:
+			newConfess.setBackgroundResource(R.color.pain);
+			confession.setContentDescription("Pain");
+			break;
+		case 2:
+			newConfess.setBackgroundResource(R.color.guilt);
+			confession.setContentDescription("Guilt");
+			break;
+		case 3:
+			newConfess.setBackgroundResource(R.color.fantasy);
+			confession.setContentDescription("Fantasy");
+			break;
+		case 4:
+			newConfess.setBackgroundResource(R.color.dream);
+			confession.setContentDescription("Dream");
+			break;
+		}
+		rand = (rand+1)%5;
+		//newConfess.setBackgroundResource(R.drawable.bluebk);
+		newConfess.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+		newConfess.setEms(10);
+		newConfess.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				expandItem(view);
+			}
+		});
+		newConfess.setMaxLines(3);
+		Animation fadeIn = new AlphaAnimation(0, 1);
+		fadeIn.setDuration(1000);
+		newConfess.setAnimation(fadeIn);
+		confession.getChildAt(0).setPadding((int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f));
+		confession.getChildAt(0).setBackgroundResource(R.drawable.border);
+		mPager.setCurrentItem(1);
+
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+
+				((ScrollView) findViewById(R.id.feed))
+						.fullScroll(ScrollView.FOCUS_UP);
+				((LinearLayout) findViewById(R.id.confession_list))
+						.post(new Runnable() {
+
+							public void run() {
+								((LinearLayout) findViewById(R.id.confession_list))
+										.addView(confession);
+							}
+						});
+			}
+		}, 500);
+
+	}
+
 	public void addItem(View view) {
 		// Instantiate a new "row" view.
 		final ViewGroup mFilter = (ViewGroup) findViewById(R.id.filter_cat);
@@ -209,9 +364,8 @@ public class MainActivity extends FragmentActivity implements
 				.inflate(R.layout.list_item_example, null);
 		ArrayList<View> presentView = new ArrayList<View>();
 
-		mFilter.findViewsWithText(presentView, ((TextView) view).getText(),1);
-		
-		if (presentView.size()==0) {
+		mFilter.findViewsWithText(presentView, ((TextView) view).getText(), 1);
+		if (presentView.size() == 0) {
 			// Set the text in the new row to a random country.
 			((TextView) newView.findViewById(android.R.id.text1))
 					.setText(((TextView) view).getText());
@@ -221,7 +375,7 @@ public class MainActivity extends FragmentActivity implements
 					.setText(((TextView) view).getText());
 			// Set a click listener for the "X" button in the row that will
 			// remove the row.
-			
+
 			newView.findViewById(R.id.delete_button).setOnClickListener(
 					new View.OnClickListener() {
 						@Override
@@ -274,44 +428,41 @@ public class MainActivity extends FragmentActivity implements
 							}
 						}
 					});
-	
+
 			// Because mFilter has android:animateLayoutChanges set to true,
 			// adding this view is automatically animated.
 			// mFilterCat.addView(newViewCat);
-			mFilter.addView(newView,0);
-			mFilterLoc.addView(newViewLoc,0);
-			mFilterMain.addView(newViewMain,0);
+			mFilter.addView(newView, 0);
+			mFilterLoc.addView(newViewLoc, 0);
+			mFilterMain.addView(newViewMain, 0);
 			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_main).setVisibility(View.VISIBLE);
-			
-		}else Toast.makeText(this, "Already added!", Toast.LENGTH_LONG).show();
+
+		} else
+			Toast.makeText(this, "Already added!", Toast.LENGTH_LONG).show();
 	}
 
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager
-				.beginTransaction()
-				/*
-<<<<<<< HEAD
-				//should be content_frame
-				.replace(R.id.container,
-=======
-*/
-				.replace(R.id.pager,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+		fragmentManager.beginTransaction()
+		/*
+		 * <<<<<<< HEAD //should be content_frame .replace(R.id.container,
+		 * =======
+		 */
+		.replace(R.id.pager, PlaceholderFragment.newInstance(position + 1))
+				.commit();
 	}
-	
-	
-	
+
 	public void onSectionAttached(int number) {
-		//Intent intent;
+		// Intent intent;
 		switch (number) {
 		case 1:
-			mTitle = "Feed";
-			//intent = new Intent(MainActivity.this, ConfessionListActivity.class);
-	        //startActivity(intent);
+			mTitle = getString(R.string.title_section1);
+			// intent = new Intent(MainActivity.this,
+			// ConfessionListActivity.class);
+			// startActivity(intent);
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
@@ -322,23 +473,22 @@ public class MainActivity extends FragmentActivity implements
 		case 4:
 			getSettings();
 			break;
-		
+
 		}
 	}
+
 	/*
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-	    MenuItem item= menu.findItem(R.id.menu_settings);
-	    item.setVisible(true);
-	    super.onPrepareOptionsMenu(menu);
+	 * @Override public boolean onPrepareOptionsMenu(Menu menu) { MenuItem item=
+	 * menu.findItem(R.id.menu_settings); item.setVisible(true);
+	 * super.onPrepareOptionsMenu(menu); }
+	 */
+	public void getSettings() {
+		Intent intent;
+		intent = new Intent(this, SettingActivity.class);
+		startActivityForResult(intent, 1);
+
 	}
-	*/
-	public void getSettings(){
-			Intent intent;
-			intent = new Intent(this, SettingActivity.class);
-			startActivityForResult(intent, 1);
-	
-	}
+
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -360,39 +510,66 @@ public class MainActivity extends FragmentActivity implements
 		}
 		return super.onCreateOptionsMenu(menu);
 	}
+
 	public void sendMessage() {
 		Intent intent;
 		intent = new Intent(this, ComposeActivity.class);
 		startActivityForResult(intent, 1);
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 1) {
 			String confession = data.getExtras().get("result").toString();
-			TextView newConfess = new TextView(this);
+			final TextView newConfess = new TextView(this);
 			newConfess.setText(confession);
 			final float scale = getResources().getDisplayMetrics().density;
-			newConfess.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,((int)(scale*194+0.5f))));
-			newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			newConfess.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT, ((int) (scale * 194 + 0.5f))));
+			newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 			newConfess.setGravity(Gravity.CENTER);
 			newConfess.setEllipsize(TextUtils.TruncateAt.END);
 			newConfess.setBackgroundResource(R.drawable.bluebk);
-			newConfess.setTypeface(Typeface.SERIF,Typeface.NORMAL);
+			newConfess.setTypeface(Typeface.SERIF, Typeface.NORMAL);
 			newConfess.setEms(10);
+			newConfess.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View view) {
+					expandItem(view);
+				}
+			});
 			newConfess.setMaxLines(3);
 			Animation fadeIn = new AlphaAnimation(0, 1);
-		    fadeIn.setDuration(1000);
-		    newConfess.setAnimation(fadeIn);
-			((LinearLayout)findViewById(R.id.confession_list)).addView(newConfess,0);
+			fadeIn.setDuration(1000);
+			newConfess.setAnimation(fadeIn);
+
 			mPager.setCurrentItem(1);
+
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+
+					((ScrollView) findViewById(R.id.feed))
+							.fullScroll(ScrollView.FOCUS_UP);
+					((LinearLayout) findViewById(R.id.confession_list))
+							.post(new Runnable() {
+
+								public void run() {
+									((LinearLayout) findViewById(R.id.confession_list))
+											.addView(newConfess, 0);
+								}
+							});
+				}
+			}, 1000);
 		}
 
 	}
-	public void restoreCursor(){
+
+	public void restoreCursor() {
 		((AutoCompleteTextView) findViewById(R.id.addLocation))
-		.setCursorVisible(true);
+				.setCursorVisible(true);
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -436,8 +613,8 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.row_confession, container,
-					false);
+			View rootView = inflater.inflate(R.layout.row_confession,
+					container, false);
 
 			return rootView;
 		}
