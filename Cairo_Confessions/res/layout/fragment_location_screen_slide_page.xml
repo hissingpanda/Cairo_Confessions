@@ -43,9 +43,8 @@
         android:id="@+id/content_loc"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="@drawable/border"
-        android:visibility="gone"
-        android:layout_margin="3dp" >
+	    android:background="@drawable/textlines"
+        android:visibility="gone" >
 
         <TextView
             style="?android:textAppearanceMedium"
@@ -80,7 +79,6 @@
                 android:columnCount="4"
                 android:divider="?android:dividerHorizontal"
                 android:orientation="horizontal"
-                android:padding="1dp"
                 android:rowCount="2"
                 android:showDividers="middle" />
         </ScrollView>
@@ -95,15 +93,25 @@
 	        android:id="@+id/locations"
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
-	        android:layout_weight="1"
-	        android:orientation="vertical"
-	        android:padding="6dp" >
-	
+	        android:background="#080808"
+	        android:orientation="vertical" >
+			
 	        <TextView
 	            android:layout_width="match_parent"
-	            android:layout_height="80dp"
-	            android:layout_margin="3dp"
-	            android:background="@drawable/riyadh"
+	            android:layout_height="150dp"
+	            android:background="@drawable/local"
+	            android:clickable="true"
+	            android:gravity="center"
+	            android:onClick="addItem"
+	            android:tag="Local"
+	            android:text="Local"
+	            android:textSize="30sp" />
+		
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="150dp"
+	            android:background="@drawable/riyadh2"
+	            android:layout_marginTop="2dp"
 	            android:clickable="true"
 	            android:gravity="center"
 	            android:onClick="addItem"
@@ -114,9 +122,9 @@
 	        <TextView
 	            style="?android:textAppearanceMedium"
 	            android:layout_width="match_parent"
-	            android:layout_height="80dp"
-	            android:layout_margin="3dp"
-	            android:background="@drawable/cairo"
+	            android:layout_height="150dp"
+	            android:background="@drawable/cairo2"
+	            android:layout_marginTop="2dp"
 	            android:clickable="true"
 	            android:gravity="center"
 	            android:onClick="addItem"
@@ -127,9 +135,9 @@
 	        <TextView
 	            style="?android:textAppearanceMedium"
 	            android:layout_width="match_parent"
-	            android:layout_height="80dp"
-	            android:layout_margin="3dp"
-	            android:background="@drawable/nyc"
+	            android:layout_height="150dp"
+	            android:background="@drawable/nyc2"
+	            android:layout_marginTop="2dp"
 	            android:clickable="true"
 	            android:gravity="center"
 	            android:onClick="addItem"

@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -81,15 +82,17 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 				setResult(1, intent);
 				final float scale = getResources().getDisplayMetrics().density;
 				tx.setText(message);
-				tx.setBackgroundResource(R.drawable.back);
+				//tx.setBackgroundResource(R.drawable.back);
+				tx.setBackgroundColor(Color.parseColor("#009933"));
 				tx.setTextColor(getResources().getColor(R.color.confession));
 				tx.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				tx.setTypeface(Typeface.SERIF, Typeface.NORMAL);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				lp.setMargins((int) (scale * 5 + 0.5f),
-				/* (int) (scale * 5 + 0.5f) */0, (int) (scale * 5 + 0.5f),
-						(int) (scale * 5 + 0.5f));
+				/*
+				lp.setMargins((int) 0,
+				0, 0, (int) (scale * 5 + 0.5f));
+				*/
 				tx.setLayoutParams(lp); // close to 100dp
 
 				tx.setPadding((int) (scale * 5 + 0.5f),
