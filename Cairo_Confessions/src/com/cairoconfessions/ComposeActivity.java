@@ -50,8 +50,10 @@ public class ComposeActivity extends FragmentActivity {
 	public void postConfession(View veiw) {
 		Intent intent = getIntent();
 		EditText editText = (EditText) findViewById(R.id.new_confession);
+		String cat = ((Spinner) findViewById(R.id.spinner)).getSelectedItem().toString();
 		String message = editText.getText().toString();
 		intent.putExtra("result", message);
+		intent.putExtra("desc", cat);
 		setResult(1,intent);
 		finish();
 	}

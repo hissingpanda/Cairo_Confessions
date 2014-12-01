@@ -81,7 +81,7 @@ public class NavigationDrawerFragment extends Fragment {
 		}
 
 		// Select either the default item (0) or the last selected item.
-		//selectItem(mCurrentSelectedPosition);
+		// selectItem(mCurrentSelectedPosition);
 	}
 
 	@Override
@@ -109,10 +109,11 @@ public class NavigationDrawerFragment extends Fragment {
 				.getThemedContext(),
 				android.R.layout.simple_list_item_activated_1,
 				android.R.id.text1, new String[] {
+						getString(R.string.title_home),
 						getString(R.string.title_section1),
 						getString(R.string.title_section2),
 						getString(R.string.title_section3),
-						getString(R.string.title_section4),}));
+						getString(R.string.title_section4), }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
@@ -275,18 +276,21 @@ public class NavigationDrawerFragment extends Fragment {
 
 		if (item.getItemId() == R.id.action_example) {
 			sendMessage(getView());
-			//Toast.makeText(getActivity(), "Compose Message.", Toast.LENGTH_SHORT)
-				//	.show();
+			// Toast.makeText(getActivity(), "Compose Message.",
+			// Toast.LENGTH_SHORT)
+			// .show();
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
 	}
+
 	public void sendMessage(View view) {
 		Intent intent;
 		intent = new Intent(view.getContext(), ComposeActivity.class);
-    	startActivity(intent);
+		startActivity(intent);
 	}
+
 	/**
 	 * Per the navigation drawer design guidelines, updates the action bar to
 	 * show the global app 'context', rather than just what's in the current

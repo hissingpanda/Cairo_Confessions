@@ -33,7 +33,8 @@
         android:gravity="center"/>
     </LinearLayout>
  
-    <ScrollView android:layout_width="match_parent"
+    <ScrollView 
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
     	android:fadeScrollbars="false"

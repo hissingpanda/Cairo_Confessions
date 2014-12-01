@@ -3,25 +3,23 @@ package com.cairoconfessions;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 public class ExpandedConfessionActivity extends FragmentActivity {
 	@Override
@@ -32,7 +30,6 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 		getActionBar().setTitle("Cairo Confessions");
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-		EditText editText = (EditText) findViewById(R.id.reply);
 		Intent intent = getIntent();
 		String message = intent.getStringExtra("confession");
 		TextView confession = ((TextView) findViewById(R.id.text2));
@@ -41,72 +38,14 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 			confession.setBackgroundResource(R.color.love);
 
 		if (intent.getStringExtra("category").equals("Pain"))
-
 			confession.setBackgroundResource(R.color.pain);
 		if (intent.getStringExtra("category").equals("Guilt"))
-
 			confession.setBackgroundResource(R.color.guilt);
 		if (intent.getStringExtra("category").equals("Fantasy"))
-
 			confession.setBackgroundResource(R.color.fantasy);
 		if (intent.getStringExtra("category").equals("Dream"))
-
 			confession.setBackgroundResource(R.color.dream);
 
-		editText.setOnEditorActionListener(new OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId,
-					KeyEvent event) {
-				boolean handled = false;
-				Intent intent = getIntent();
-				if (actionId == EditorInfo.IME_ACTION_SEND) {
-					sendMessage();
-					// EditText comment = (EditText) findViewById(R.id.reply);
-					// String message = comment.getText().toString();
-					// intent.putExtra("result", message);
-					setResult(1, intent);
-					handled = true;
-				}
-				return handled;
-			}
-
-			private void sendMessage() {
-				LinearLayout linLayout = (LinearLayout) findViewById(R.id.linlayoutchild);
-
-				TextView tx = new TextView(ExpandedConfessionActivity.this);
-				Intent intent = getIntent();
-				EditText editText = (EditText) findViewById(R.id.reply);
-				String message = editText.getText().toString();
-				intent.putExtra("Result", message);
-				setResult(1, intent);
-				final float scale = getResources().getDisplayMetrics().density;
-				tx.setText(message);
-				tx.setBackgroundResource(R.drawable.back);
-				tx.setTextColor(getResources().getColor(R.color.confession));
-				tx.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-				tx.setTypeface(Typeface.SERIF, Typeface.NORMAL);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				lp.setMargins((int) (scale * 5 + 0.5f),
-				/* (int) (scale * 5 + 0.5f) */0, (int) (scale * 5 + 0.5f),
-						(int) (scale * 5 + 0.5f));
-				tx.setLayoutParams(lp); // close to 100dp
-
-				tx.setPadding((int) (scale * 5 + 0.5f),
-						(int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),
-						(int) (scale * 5 + 0.5f));
-				linLayout.addView(tx);
-				editText.setText("");
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						((ScrollView) findViewById(R.id.comment_scroll))
-								.fullScroll(ScrollView.FOCUS_DOWN);
-					}
-				}, 500);
-
-			}
-		});
 		final View decorView = this.getWindow().getDecorView();
 		decorView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -126,8 +65,9 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 
 							if (!keyboardHidden) {
 								getActionBar().hide();
-								reduceHeight = height - displayHeight - 55;
-
+								reduceHeight = height - displayHeight - 109;
+								((EditText) findViewById(R.id.reply))
+										.setCursorVisible(true);
 								LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(
 										LinearLayout.LayoutParams.MATCH_PARENT,
 										mylistviewHeight - reduceHeight);
@@ -135,6 +75,8 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 								myScrollView.requestLayout();
 
 							} else {
+								((EditText) findViewById(R.id.reply))
+										.setCursorVisible(false);
 								getActionBar().show();
 								LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(
 										LinearLayout.LayoutParams.MATCH_PARENT,
@@ -162,5 +104,44 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void postComment(View view) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+		LinearLayout linLayout = (LinearLayout) findViewById(R.id.linlayoutchild);
+
+		TextView tx = new TextView(ExpandedConfessionActivity.this);
+		Intent intent = getIntent();
+		EditText editText = (EditText) findViewById(R.id.reply);
+		String message = editText.getText().toString();
+		intent.putExtra("Result", message);
+		setResult(1, intent);
+		final float scale = getResources().getDisplayMetrics().density;
+		tx.setText(message);
+		tx.setBackgroundResource(R.drawable.back);
+		tx.setTextColor(getResources().getColor(R.color.confession));
+		tx.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+		tx.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		lp.setMargins((int) (scale * 5 + 0.5f),
+		/* (int) (scale * 5 + 0.5f) */0, (int) (scale * 5 + 0.5f),
+				(int) (scale * 5 + 0.5f));
+		tx.setLayoutParams(lp); // close to 100dp
+
+		tx.setPadding((int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),
+				(int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f));
+		linLayout.addView(tx);
+		editText.setText("");
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				((ScrollView) findViewById(R.id.comment_scroll))
+						.fullScroll(ScrollView.FOCUS_DOWN);
+			}
+		}, 500);
+		setResult(1, intent);
+
 	}
 }

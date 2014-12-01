@@ -18,6 +18,8 @@ package com.cairoconfessions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,10 +29,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -38,9 +38,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,37 +95,13 @@ public class MainActivity extends FragmentActivity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 
-		// <<<<<<< HEAD
-
-		// Intent intent = new Intent(MainActivity.this,
-		// ConfessionListActivity.class);
-		// startActivity(intent);
-
-		// FragmentManager fm = getSupportFragmentManager();
-		/*
-		 * if (fm.findFragmentById(android.R.id.content) == null) {
-		 * ConfessionListFragment list = new ConfessionListFragment();
-		 * fm.beginTransaction().add(android.R.id.content, list).commit(); }
-		 */
-		/*
-		 * Fragment list_fragment = new ConfessionListFragment();
-		 * 
-		 * FragmentTransaction fm =
-		 * getSupportFragmentManager().beginTransaction(
-		 * ).add(android.R.id.content, list_fragment);
-		 * //fm.replace(R.id.content, list_fragment);
-		 * fm.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		 * fm.commit(); fm.hide(list_fragment);
-		 */
-		// =======
-
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
 		mPager.setCurrentItem(1);
 		mPager.setPageMargin(1);
-		mPager.setOffscreenPageLimit(2);
+		mPager.setOffscreenPageLimit(6);
 		COUNTRIES = getResources().getStringArray(R.array.countries_array);
 		mSwipeyTabs = (SwipeyTabsView) findViewById(R.id.swipey_tabs);
 		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this);
@@ -135,18 +109,7 @@ public class MainActivity extends FragmentActivity implements
 		mSwipeyTabs.setViewPager(mPager);
 		Confessions = getResources().getStringArray(R.array.confession_array);
 		for (int i = 0; i < Confessions.length; i++)
-			addConfession(Confessions[i].toString());
-		/*
-		 * mPager.setOnPageChangeListener(new
-		 * ViewPager.SimpleOnPageChangeListener() {
-		 * 
-		 * @Override public void onPageSelected(int position) {
-		 * InputMethodManager imm = (InputMethodManager)
-		 * getSystemService(Context.INPUT_METHOD_SERVICE);
-		 * imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
-		 * ((AutoCompleteTextView)
-		 * findViewById(R.id.addLocation)).setCursorVisible(false); } });
-		 */
+			addConfession(Confessions[i].toString(), "");
 
 	}
 
@@ -155,8 +118,12 @@ public class MainActivity extends FragmentActivity implements
 	public void follow(View view) {
 		if (((TextView) view).getText().equals("Follow"))
 			((TextView) view).setText("Unfollow");
-		else
+		else {
 			((TextView) view).setText("Follow");
+			if (mTitle.equals("Followers"))
+				((LinearLayout) view.getParent().getParent().getParent())
+						.setVisibility(View.GONE);
+		}
 	}
 
 	public void sendShare(View view) {
@@ -252,7 +219,7 @@ public class MainActivity extends FragmentActivity implements
 			float scale = getResources().getDisplayMetrics().density;
 			newView.setGravity(17);
 			newView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-			newView.setBackgroundColor(Color.RED);
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, (int) (80 * scale));
 			lp.setMargins((int) (3 * scale), (int) (3 * scale),
@@ -275,79 +242,113 @@ public class MainActivity extends FragmentActivity implements
 				ExpandedConfessionActivity.class);
 		mainIntent.putExtra("confession", ((TextView) view).getText()
 				.toString());
-		mainIntent.putExtra("category", ((LinearLayout)view.getParent().getParent()).getContentDescription().toString());
+		mainIntent.putExtra("category", ((LinearLayout) view.getParent()
+				.getParent().getParent()).getContentDescription().toString());
 		startActivity(mainIntent);
 
 	};
 
 	private int rand = 0;
-	public void addConfession(String confess) {
+
+	public View addConfession(String confess, String desc) {
 		final ViewGroup confession = (ViewGroup) LayoutInflater.from(this)
 				.inflate(R.layout.confession_list_item_example, null);
 		final TextView newConfess = (TextView) confession
 				.findViewById(R.id.text_main);
 		newConfess.setText(confess);
 		final float scale = getResources().getDisplayMetrics().density;
-		newConfess.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				((int) (scale * 194 + 0.5f))));
-		newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-		newConfess.setGravity(Gravity.CENTER);
-		newConfess.setEllipsize(TextUtils.TruncateAt.END);
-		switch (rand) {
+		if (!desc.equals("")) {
+			confession.setContentDescription(desc);
+			if (desc.equals("Love"))
+				newConfess.setBackgroundResource(R.color.love);
+			if (desc.equals("Pain"))
+				newConfess.setBackgroundResource(R.color.pain);
+			if (desc.equals("Guilt"))
+				newConfess.setBackgroundResource(R.color.guilt);
+			if (desc.equals("Fantasy"))
+				newConfess.setBackgroundResource(R.color.fantasy);
+			if (desc.equals("Dream"))
+				newConfess.setBackgroundResource(R.color.dream);
+		} else {
+			switch ((new Random().nextInt(5)) % 5) {
+			case 0:
+				newConfess.setBackgroundResource(R.color.love);
+				((TextView) confession.findViewById(R.id.confess_loc))
+						.setText("Riyadh");
+				confession.setContentDescription("Love");
+				break;
+			case 1:
+				newConfess.setBackgroundResource(R.color.pain);
+				((TextView) confession.findViewById(R.id.confess_loc))
+						.setText("Cairo");
+				confession.setContentDescription("Pain");
+				break;
+			case 2:
+				newConfess.setBackgroundResource(R.color.guilt);
+				((TextView) confession.findViewById(R.id.confess_loc))
+						.setText("New York");
+				confession.setContentDescription("Guilt");
+				break;
+			case 3:
+				newConfess.setBackgroundResource(R.color.fantasy);
+				((TextView) confession.findViewById(R.id.confess_loc))
+						.setText("New York");
+				confession.setContentDescription("Fantasy");
+				break;
+			case 4:
+				newConfess.setBackgroundResource(R.color.dream);
+				((TextView) confession.findViewById(R.id.confess_loc))
+						.setText("Riyadh");
+				confession.setContentDescription("Dream");
+				break;
+			}
+		}
+		switch ((new Random().nextInt(3)) % 3) {
 		case 0:
-			newConfess.setBackgroundResource(R.color.love);
-			confession.setContentDescription("Love");
+			((TextView) confession.findViewById(R.id.confess_loc))
+					.setText("Riyadh");
 			break;
 		case 1:
-			newConfess.setBackgroundResource(R.color.pain);
-			confession.setContentDescription("Pain");
+			((TextView) confession.findViewById(R.id.confess_loc))
+					.setText("Cairo");
 			break;
 		case 2:
-			newConfess.setBackgroundResource(R.color.guilt);
-			confession.setContentDescription("Guilt");
-			break;
-		case 3:
-			newConfess.setBackgroundResource(R.color.fantasy);
-			confession.setContentDescription("Fantasy");
-			break;
-		case 4:
-			newConfess.setBackgroundResource(R.color.dream);
-			confession.setContentDescription("Dream");
+			((TextView) confession.findViewById(R.id.confess_loc))
+					.setText("New York");
 			break;
 		}
-		rand = (rand+1)%5;
-		//newConfess.setBackgroundResource(R.drawable.bluebk);
-		newConfess.setTypeface(Typeface.SERIF, Typeface.NORMAL);
-		newConfess.setEms(10);
-		newConfess.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				expandItem(view);
-			}
-		});
-		newConfess.setMaxLines(3);
 		Animation fadeIn = new AlphaAnimation(0, 1);
 		fadeIn.setDuration(1000);
-		newConfess.setAnimation(fadeIn);
-		confession.getChildAt(0).setPadding((int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f), (int)(scale*1.5+0.5f));
+		confession.setAnimation(fadeIn);
+		confession.getChildAt(0).setPadding((int) (scale * 1.5 + 0.5f),
+				(int) (scale * 1.5 + 0.5f), (int) (scale * 1.5 + 0.5f),
+				(int) (scale * 1.5 + 0.5f));
 		confession.getChildAt(0).setBackgroundResource(R.drawable.border);
 		mPager.setCurrentItem(1);
+		if (!desc.equals("")) {
+			((ScrollView) findViewById(R.id.feed))
+					.fullScroll(ScrollView.FOCUS_UP);
+			((LinearLayout) findViewById(R.id.confession_list)).addView(
+					confession, 0);
+		} else {
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
 
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
+					((ScrollView) findViewById(R.id.feed))
+							.fullScroll(ScrollView.FOCUS_UP);
+					((LinearLayout) findViewById(R.id.confession_list))
+							.post(new Runnable() {
 
-				((ScrollView) findViewById(R.id.feed))
-						.fullScroll(ScrollView.FOCUS_UP);
-				((LinearLayout) findViewById(R.id.confession_list))
-						.post(new Runnable() {
-
-							public void run() {
-								((LinearLayout) findViewById(R.id.confession_list))
-										.addView(confession);
-							}
-						});
-			}
-		}, 500);
+								public void run() {
+									((LinearLayout) findViewById(R.id.confession_list))
+											.addView(confession, 0);
+								}
+							});
+				}
+			}, 1000);
+		}
+		return confession;
 
 	}
 
@@ -366,13 +367,47 @@ public class MainActivity extends FragmentActivity implements
 
 		mFilter.findViewsWithText(presentView, ((TextView) view).getText(), 1);
 		if (presentView.size() == 0) {
-			// Set the text in the new row to a random country.
+			final String filterName = ((TextView) view).getText().toString();
+			switch (((LinearLayout) view.getParent()).getId()) {
+			case R.id.cat_filter_list:
+				Categories.add(filterName);
+				break;
+			case R.id.locations:
+				Cities.add(filterName);
+				break;
+			}
+			if (filterName.equals("Love")) {
+				newView.getChildAt(0).setBackgroundResource(R.color.love);
+				newViewLoc.getChildAt(0).setBackgroundResource(R.color.love);
+				newViewMain.getChildAt(0).setBackgroundResource(R.color.love);
+			}
+			if (filterName.equals("Pain")) {
+				newView.getChildAt(0).setBackgroundResource(R.color.pain);
+				newViewLoc.getChildAt(0).setBackgroundResource(R.color.pain);
+				newViewMain.getChildAt(0).setBackgroundResource(R.color.pain);
+			}
+			if (filterName.equals("Guilt")) {
+				newView.getChildAt(0).setBackgroundResource(R.color.guilt);
+				newViewLoc.getChildAt(0).setBackgroundResource(R.color.guilt);
+				newViewMain.getChildAt(0).setBackgroundResource(R.color.guilt);
+			}
+			if (filterName.equals("Fantasy")) {
+				newView.getChildAt(0).setBackgroundResource(R.color.fantasy);
+				newViewLoc.getChildAt(0).setBackgroundResource(R.color.fantasy);
+				newViewMain.getChildAt(0)
+						.setBackgroundResource(R.color.fantasy);
+			}
+			if (filterName.equals("Dream")) {
+				newView.getChildAt(0).setBackgroundResource(R.color.dream);
+				newViewLoc.getChildAt(0).setBackgroundResource(R.color.dream);
+				newViewMain.getChildAt(0).setBackgroundResource(R.color.dream);
+			}
 			((TextView) newView.findViewById(android.R.id.text1))
-					.setText(((TextView) view).getText());
+					.setText(filterName);
 			((TextView) newViewLoc.findViewById(android.R.id.text1))
-					.setText(((TextView) view).getText());
+					.setText(filterName);
 			((TextView) newViewMain.findViewById(android.R.id.text1))
-					.setText(((TextView) view).getText());
+					.setText(filterName);
 			// Set a click listener for the "X" button in the row that will
 			// remove the row.
 
@@ -391,6 +426,13 @@ public class MainActivity extends FragmentActivity implements
 								findViewById(R.id.content_main).setVisibility(
 										View.GONE);
 							}
+							if (Categories.contains(filterName))
+								while (Categories.remove(filterName))
+									;
+							if (Cities.contains(filterName))
+								while (Cities.remove(filterName))
+									;
+							updateFilters();
 						}
 					});
 			newViewLoc.findViewById(R.id.delete_button).setOnClickListener(
@@ -408,6 +450,13 @@ public class MainActivity extends FragmentActivity implements
 								findViewById(R.id.content_main).setVisibility(
 										View.GONE);
 							}
+							if (Categories.contains(filterName))
+								while (Categories.remove(filterName))
+									;
+							if (Cities.contains(filterName))
+								while (Cities.remove(filterName))
+									;
+							updateFilters();
 						}
 
 					});
@@ -426,7 +475,13 @@ public class MainActivity extends FragmentActivity implements
 								findViewById(R.id.content_main).setVisibility(
 										View.GONE);
 							}
+							if (Categories.contains(filterName))
+								while(Categories.remove(filterName));
+							if (Cities.contains(filterName))
+								while(Cities.remove(filterName));
+							updateFilters();
 						}
+
 					});
 
 			// Because mFilter has android:animateLayoutChanges set to true,
@@ -438,34 +493,128 @@ public class MainActivity extends FragmentActivity implements
 			findViewById(R.id.content_loc).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_cat).setVisibility(View.VISIBLE);
 			findViewById(R.id.content_main).setVisibility(View.VISIBLE);
-
+			updateFilters();
+			Toast.makeText(this, filterName + " filter added!",
+					Toast.LENGTH_LONG).show();
 		} else
 			Toast.makeText(this, "Already added!", Toast.LENGTH_LONG).show();
 	}
 
-	public void onNavigationDrawerItemSelected(int position) {
-		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-		/*
-		 * <<<<<<< HEAD //should be content_frame .replace(R.id.container,
-		 * =======
-		 */
-		.replace(R.id.pager, PlaceholderFragment.newInstance(position + 1))
-				.commit();
+	List<String> Cities = new ArrayList<String>();
+	List<String> Categories = new ArrayList<String>();
+
+	public void updateFilters() {
+		LinearLayout list = (LinearLayout) findViewById(R.id.confession_list);
+		for (int i = 0; i < list.getChildCount(); i++) {
+			View currDesc = list.getChildAt(i);
+			String currLoc = ((TextView) ((LinearLayout) list.getChildAt(i))
+					.findViewById(R.id.confess_loc)).getText().toString();
+
+			if (!Categories.isEmpty() && !Cities.isEmpty()) {
+				if (!Categories.contains(currDesc.getContentDescription())
+						&& !Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+				if (Categories.contains(currDesc.getContentDescription())
+						&& !Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+				if (!Categories.contains(currDesc.getContentDescription())
+						&& Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+				if (Categories.contains(currDesc.getContentDescription())
+						&& Cities.contains(currLoc))
+					if (mTitle.equals("Followers")) {
+						if (((TextView) currDesc
+								.findViewById(R.id.follow_button)).getText()
+								.equals("Unfollow"))
+							currDesc.setVisibility(View.VISIBLE);
+					} else
+						currDesc.setVisibility(View.VISIBLE);
+			} else if (Categories.isEmpty() && !Cities.isEmpty()) {
+				if (!Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+				if (Cities.contains(currLoc)) {
+					if (mTitle.equals("Followers")) {
+						if (((TextView) currDesc
+								.findViewById(R.id.follow_button)).getText()
+								.equals("Unfollow"))
+							currDesc.setVisibility(View.VISIBLE);
+					} else
+						currDesc.setVisibility(View.VISIBLE);
+				}
+			} else if (!Categories.isEmpty() && Cities.isEmpty()) {
+				if (!Categories.contains(currDesc.getContentDescription()))
+					currDesc.setVisibility(View.GONE);
+				if (Categories.contains(currDesc.getContentDescription())) {
+					if (mTitle.equals("Followers")) {
+						if (((TextView) currDesc
+								.findViewById(R.id.follow_button)).getText()
+								.equals("Unfollow"))
+							currDesc.setVisibility(View.VISIBLE);
+					} else
+						currDesc.setVisibility(View.VISIBLE);
+				}
+			} else if (Categories.isEmpty() && Cities.isEmpty()) {
+				if (mTitle.equals("Followers")) {
+					if (((TextView) currDesc.findViewById(R.id.follow_button))
+							.getText().equals("Unfollow"))
+						currDesc.setVisibility(View.VISIBLE);
+				} else
+					currDesc.setVisibility(View.VISIBLE);
+			}
+		}
+
 	}
 
-	public void onSectionAttached(int number) {
-		// Intent intent;
-		switch (number) {
+	public void updateFiltersDelete() {
+		LinearLayout list = (LinearLayout) findViewById(R.id.confession_list);
+		for (int i = 0; i < list.getChildCount(); i++) {
+			View currDesc = list.getChildAt(i);
+			String currLoc = ((TextView) ((LinearLayout) list.getChildAt(i))
+					.findViewById(R.id.confess_loc)).getText().toString();
+
+			if (!Categories.isEmpty() && !Cities.isEmpty()) {
+				if (!Categories.contains(currDesc.getContentDescription())
+						&& !Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+			} else if (!Categories.isEmpty()) {
+				if (!Categories.contains(currDesc.getContentDescription()))
+					currDesc.setVisibility(View.GONE);
+			} else if (!Cities.isEmpty()) {
+				if (!Cities.contains(currLoc))
+					currDesc.setVisibility(View.GONE);
+			} else if (Categories.isEmpty() && Cities.isEmpty()) {
+				currDesc.setVisibility(View.VISIBLE);
+			} else if (Cities.isEmpty()) {
+				if (Categories.contains(currDesc.getContentDescription()))
+					currDesc.setVisibility(View.VISIBLE);
+			} else if (Categories.isEmpty())
+				if (Cities.contains(currLoc))
+					currDesc.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	public void onNavigationDrawerItemSelected(int position) {
+		LinearLayout confessions = (LinearLayout) findViewById(R.id.confession_list);
+		switch (position) {
+		case 0:
+			mTitle = "Cairo Confessions";
+			for (int i = 0; i < confessions.getChildCount(); i++)
+				if (((TextView) confessions.getChildAt(i).findViewById(
+						R.id.follow_button)).getText().equals("Follow"))
+					confessions.getChildAt(i).setVisibility(View.VISIBLE);
+			updateFilters();
+			break;
 		case 1:
 			mTitle = getString(R.string.title_section1);
-			// intent = new Intent(MainActivity.this,
-			// ConfessionListActivity.class);
-			// startActivity(intent);
 			break;
 		case 2:
 			mTitle = getString(R.string.title_section2);
+			for (int i = 0; i < confessions.getChildCount(); i++)
+				if (((TextView) confessions.getChildAt(i).findViewById(
+						R.id.follow_button)).getText().equals("Follow"))
+					confessions.getChildAt(i).setVisibility(View.GONE);
+			updateFilters();
 			break;
 		case 3:
 			mTitle = getString(R.string.title_section3);
@@ -477,14 +626,35 @@ public class MainActivity extends FragmentActivity implements
 		}
 	}
 
+	public void onSectionAttached(int number) {
+		switch (number) {
+		case 1:
+			mTitle = "Cairo Confessions";
+			break;
+		case 2:
+			mTitle = getString(R.string.title_section1);
+			break;
+		case 3:
+			mTitle = getString(R.string.title_section2);
+			break;
+		case 4:
+			mTitle = getString(R.string.title_section3);
+			break;
+		case 5:
+			mTitle = getString(R.string.title_section3);
+			break;
+
+		}
+	}
+
 	/*
 	 * @Override public boolean onPrepareOptionsMenu(Menu menu) { MenuItem item=
 	 * menu.findItem(R.id.menu_settings); item.setVisible(true);
 	 * super.onPrepareOptionsMenu(menu); }
 	 */
 	public void getSettings() {
-		Intent intent;
-		intent = new Intent(this, SettingActivity.class);
+		Intent intent = new Intent(this, SettingActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivityForResult(intent, 1);
 
 	}
@@ -522,45 +692,29 @@ public class MainActivity extends FragmentActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 1) {
 			String confession = data.getExtras().get("result").toString();
-			final TextView newConfess = new TextView(this);
-			newConfess.setText(confession);
-			final float scale = getResources().getDisplayMetrics().density;
-			newConfess.setLayoutParams(new LayoutParams(
-					LayoutParams.MATCH_PARENT, ((int) (scale * 194 + 0.5f))));
-			newConfess.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-			newConfess.setGravity(Gravity.CENTER);
-			newConfess.setEllipsize(TextUtils.TruncateAt.END);
-			newConfess.setBackgroundResource(R.drawable.bluebk);
-			newConfess.setTypeface(Typeface.SERIF, Typeface.NORMAL);
-			newConfess.setEms(10);
-			newConfess.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View view) {
-					expandItem(view);
+			String desc = data.getExtras().get("desc").toString();
+			final View newConfess = addConfession(confession, desc);
+			newConfess.findViewById(R.id.undoPost).setVisibility(View.VISIBLE);
+			newConfess.findViewById(R.id.undoPost).setOnClickListener(
+					new View.OnClickListener() {
+						public void onClick(View view) {
+							((LinearLayout) newConfess.getParent())
+									.removeView(newConfess);
+						}
+					});
+			new CountDownTimer(12000, 1000) {
+
+				public void onTick(long millisUntilFinished) {
+					((TextView) newConfess.findViewById(R.id.undoPost))
+							.setText("Undo("
+									+ ((millisUntilFinished / 1000) - 1) + ")");
 				}
-			});
-			newConfess.setMaxLines(3);
-			Animation fadeIn = new AlphaAnimation(0, 1);
-			fadeIn.setDuration(1000);
-			newConfess.setAnimation(fadeIn);
 
-			mPager.setCurrentItem(1);
-
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-
-					((ScrollView) findViewById(R.id.feed))
-							.fullScroll(ScrollView.FOCUS_UP);
-					((LinearLayout) findViewById(R.id.confession_list))
-							.post(new Runnable() {
-
-								public void run() {
-									((LinearLayout) findViewById(R.id.confession_list))
-											.addView(newConfess, 0);
-								}
-							});
+				public void onFinish() {
+					newConfess.findViewById(R.id.undoPost).setVisibility(
+							View.GONE);
 				}
-			}, 1000);
+			}.start();
 		}
 
 	}
