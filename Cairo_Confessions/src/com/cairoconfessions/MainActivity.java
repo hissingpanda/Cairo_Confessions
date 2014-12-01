@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -86,7 +85,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
+		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = "Cairo Confessions";
 		getActionBar().setTitle("Cairo Confessions");
@@ -220,10 +219,12 @@ public class MainActivity extends FragmentActivity implements
 			newView.setGravity(17);
 			newView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 
+			newView.setBackgroundResource(R.drawable.city2);
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LayoutParams.MATCH_PARENT, (int) (80 * scale));
-			lp.setMargins((int) (3 * scale), (int) (3 * scale),
-					(int) (3 * scale), (int) (3 * scale));
+					LayoutParams.MATCH_PARENT, (int) (150 * scale));
+			lp.setMargins((int) (0 * scale), (int) (0 * scale),
+					(int) (0 * scale), (int) (2 * scale));
 			newView.setLayoutParams(lp);
 			locList.addView(newView, 0);
 			addLoc.setText("");

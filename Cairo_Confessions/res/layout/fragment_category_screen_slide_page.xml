@@ -22,19 +22,20 @@
     <!-- Dummy content. -->
 <LinearLayout
     android:visibility="gone"
-    android:layout_margin="3dp"
+	android:layout_margin="3dp"
     android:id="@+id/content_cat"
     android:layout_width="match_parent"
-    android:layout_height="25dp"
-    android:background="@drawable/border">
-	<TextView 
-        style="?android:textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+       android:layout_height="25dp"
+        android:background="@drawable/border" >
+
+        <TextView
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
     	android:layout_margin="0.5dp"
-    	android:text="Filters:"
-    	android:gravity="center"
-        android:textSize="16sp" />
+            android:text="Filters:"
+    		android:gravity="center"
+            android:textSize="16sp" />
     <!-- A vertical LinearLayout in a ScrollView. This emulates a ListView (and is lighter weight
          than a ListView when there aren't many rows). -->
     <ScrollView android:layout_width="0dp"
@@ -47,13 +48,13 @@
              as they are added to and removed from the LinearLayout. -->
         <GridLayout android:id="@+id/filter_cat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="92dp"
             android:orientation="horizontal"
+                android:padding="1dp"
             android:columnCount="4"
             android:rowCount="2"
             android:divider="?android:dividerHorizontal"
-            android:animateLayoutChanges="true"
-            android:padding="1dp" />
+            android:animateLayoutChanges="true" />
 
     </ScrollView>
 
@@ -66,15 +67,13 @@
 <LinearLayout
     	android:id="@+id/cat_filter_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="6dp" >
+	    android:background="#080808" >
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:layout_margin="3dp"
+            android:layout_height="105dp"
             android:onClick="addItem"
             android:clickable="true"
             android:tag="Love"
@@ -86,9 +85,9 @@
         <TextView
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:layout_margin="3dp"
+            android:layout_height="105dp"
             android:onClick="addItem"
+	        android:layout_marginTop="2dp"
             android:clickable="true"
             android:tag="Pain"
             android:background="@color/pain"
@@ -99,9 +98,9 @@
         <TextView
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:layout_margin="3dp"
+            android:layout_height="105dp"
             android:onClick="addItem"
+	        android:layout_marginTop="2dp"
             android:clickable="true"
             android:tag="Guilt"
             android:background="@color/guilt"
@@ -112,9 +111,9 @@
         <TextView
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:layout_margin="3dp"
+            android:layout_height="105dp"
             android:onClick="addItem"
+	        android:layout_marginTop="2dp"
             android:clickable="true"
             android:tag="Dream"
             android:background="@color/dream"
@@ -125,9 +124,10 @@
         <TextView
             style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:layout_margin="3dp"
+            android:layout_height="105dp"
             android:onClick="addItem"
+	        android:layout_marginTop="2dp"
+	        android:layout_marginBottom="2dp"
             android:clickable="true"
             android:tag="Fantasy"
             android:background="@color/fantasy"

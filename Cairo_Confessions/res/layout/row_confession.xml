@@ -50,8 +50,8 @@
         android:background="@drawable/back"
         android:text="What's going on?"
         android:textColor="@color/confession"
-        android:textSize="18sp"        
-    	android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_margin="5dp"        
     	android:padding="5dp"
         android:textStyle="normal"
         android:typeface="serif" />
@@ -62,8 +62,8 @@
         android:background="@drawable/back"
         android:text="I felt the exact same last year, it gets better!"
         android:textColor="@color/confession"
-        android:textSize="18sp"        
-    	android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_margin="5dp"        
     	android:padding="5dp"
         android:textStyle="normal"
         android:typeface="serif" />
