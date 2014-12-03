@@ -23,6 +23,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.temp.cctemp.Messaging;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -619,6 +621,7 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		case 3:
 			mTitle = getString(R.string.title_section3);
+			getMessages();
 			break;
 		case 4:
 			getSettings();
@@ -653,6 +656,11 @@ public class MainActivity extends FragmentActivity implements
 	 * menu.findItem(R.id.menu_settings); item.setVisible(true);
 	 * super.onPrepareOptionsMenu(menu); }
 	 */
+	public void getMessages() {
+		Intent intent = new Intent(this, Messaging.class);
+        startActivity(intent);
+	}
+	
 	public void getSettings() {
 		Intent intent = new Intent(this, SettingActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
