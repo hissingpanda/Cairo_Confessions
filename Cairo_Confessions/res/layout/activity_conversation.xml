@@ -1,14 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
     <ListView
         android:id="@+id/Conversation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" >
+        android:layout_margin="5dp"
+        android:dividerHeight="15.0sp" >
     </ListView>
 
-</RelativeLayout>
+    <LinearLayout
+    	android:layout_width="match_parent"
+    	android:orientation="horizontal"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/border">
+		<EditText
+    		android:id="@+id/reply"
+		    android:layout_width="0dp"
+		    android:layout_weight="1"
+		    android:layout_height="wrap_content"
+		    android:inputType="textMultiLine"
+		    android:lines="2"
+		    android:cursorVisible="false"
+		    android:background="@drawable/back"
+		    android:hint="Reply..."
+		    android:padding="5dp"
+		    android:gravity="top"
+		    android:layout_gravity="center" />
+    	<Button 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Send"
+	        android:onClick="postComment"
+	        android:gravity="center" 
+	        android:layout_gravity="center"/>
+	</LinearLayout>
+
+</LinearLayout>

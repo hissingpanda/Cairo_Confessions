@@ -79,9 +79,9 @@
 		      android:value="com.cairoconfessions.MainActivity" />
         </activity>
         <activity
-            android:name=".Convsersation"
+            android:name=".Conversation"
             android:label="@string/app_name"
-        	android:parentActivityName="com.cairoconfessions.MainActivity"
+        	android:parentActivityName="com.cairoconfessions.Messaging"
    			android:configChanges="orientation|screenSize" >
             <meta-data
 		      android:name="android.support.PARENT_ACTIVITY"

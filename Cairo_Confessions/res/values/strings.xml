@@ -48,6 +48,7 @@
     <string name="received">Incoming Message</string>
     <string name="sent">Sent Message</string>
 	<string name="time">TimeStamp</string>
+	<drawable name="transparent_color">#00000000</drawable>
     
     <!-- Accessibility-only descriptions -->
     <!-- Other strings -->
