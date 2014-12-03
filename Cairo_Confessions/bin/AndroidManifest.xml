@@ -27,7 +27,7 @@
         API 12: ViewPropertyAnimator
         API 14: View properties (android.util.Property) such as View.X and View.Y.
     -->
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />
 
     <application android:allowBackup="true"
         android:label="@string/app_name"
@@ -62,6 +62,24 @@
         </activity>
         <activity
             android:name=".SettingActivity"
+            android:label="@string/app_name"
+        	android:parentActivityName="com.cairoconfessions.MainActivity"
+   			android:configChanges="orientation|screenSize" >
+            <meta-data
+		      android:name="android.support.PARENT_ACTIVITY"
+		      android:value="com.cairoconfessions.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Messaging"
+            android:label="@string/app_name"
+        	android:parentActivityName="com.cairoconfessions.MainActivity"
+   			android:configChanges="orientation|screenSize" >
+            <meta-data
+		      android:name="android.support.PARENT_ACTIVITY"
+		      android:value="com.cairoconfessions.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Conversation"
             android:label="@string/app_name"
         	android:parentActivityName="com.cairoconfessions.MainActivity"
    			android:configChanges="orientation|screenSize" >
