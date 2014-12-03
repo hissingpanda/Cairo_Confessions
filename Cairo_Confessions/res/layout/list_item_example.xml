@@ -27,7 +27,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/border"
     android:orientation="horizontal"
-    android:layout_margin="1dp">
+    android:layout_margin="0.5dp">
     <!-- Dummy text view that will display the name of a random country. -->
     <TextView android:id="@android:id/text1"
         style="?android:textAppearanceMedium"
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
     	android:layout_margin="2dp"
     	android:adjustViewBounds="true"  
-        android:maxWidth="15dp"
-        android:maxHeight="15dp"
+        android:maxWidth="17dp"
+        android:maxHeight="17dp"
   		android:scaleType="fitCenter" 
         android:src="@drawable/ic_list_remove"
         android:background="?android:selectableItemBackground"
