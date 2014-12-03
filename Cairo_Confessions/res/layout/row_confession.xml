@@ -13,69 +13,145 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linlayoutparent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+	android:background="#080808"
     android:animateLayoutChanges="true">
     <ScrollView
+        android:id="@+id/comment_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    	android:layout_height="0dp"
+    	android:layout_weight="1"
         android:orientation="vertical"
     	android:scrollbars="none">
 <LinearLayout
     android:id="@+id/linlayoutchild"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:animateLayoutChanges="true">
 
     <TextView
-        android:id="@android:id/text2"
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:layout_weight="66.54"
-        android:background="@drawable/bluebk"
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="I’ve been living all my life abroad and I regret everything."
         android:textColor="@color/confession"
         android:textSize="24sp"
+    	android:padding="20dp"
         android:textStyle="normal"
         android:typeface="serif" />
-
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/back"
-        android:gravity="center"
+        android:background="#ffffff"
         android:text="What's going on?"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:padding="5dp"
         android:textColor="@color/confession"
         android:textSize="18sp"
         android:textStyle="normal"
         android:typeface="serif" />
-
+    		<TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="55dp"
+	        android:text="iedell"
+	        android:textColor="#009933"
+	        android:textSize="18sp"
+	        android:textStyle="normal"
+	        android:typeface="serif"
+	    	android:layout_alignParentBottom="true" />
+	    	<ImageButton
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:layout_alignParentLeft="true"
+	    	    android:layout_alignParentBottom="true"
+	    	    android:gravity="right"
+	    	    android:src="@drawable/ic_action_email" />
+	    	<ImageButton
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    android:src="@drawable/report2"
+	    	    android:layout_alignParentRight="true"
+	    	    android:layout_alignParentBottom="true"
+       			android:onClick="report"/>
+	    	
+	    	</RelativeLayout>
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/back"
-        android:gravity="center"
+        android:background="#ffffff"
+        android:layout_marginBottom="2dp"
+        android:padding="5dp"
         android:text="I felt the exact same last year, it gets better!"
         android:textColor="@color/confession"
         android:textSize="18sp"
         android:textStyle="normal"
         android:typeface="serif" />
-    
+    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="55dp"
+	        android:text="kloeee"
+	        android:textColor="#009933"
+	        android:textSize="18sp"
+	        android:textStyle="normal"
+	        android:typeface="serif"
+	    	android:layout_alignParentBottom="true" />
+	    	
+
+	    	<ImageButton
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:layout_alignParentLeft="true"
+	    	    android:layout_alignParentBottom="true"
+	    	    android:gravity="right"
+	    	    android:src="@drawable/ic_action_email" />
+	    	<ImageButton
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    android:src="@drawable/report2"
+	    	    android:layout_alignParentRight="true"
+	    	    android:layout_alignParentBottom="true"
+       			android:onClick="report" />
+	    	</RelativeLayout>
+		    
 </LinearLayout>
 </ScrollView>
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
 <EditText
     android:id="@+id/reply"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
+    android:inputType="textMultiLine"
     android:lines="2"
+    android:cursorVisible="false"
+    android:background="#ffffff"
     android:hint="Reply..."
-    android:inputType="text"
-    android:imeOptions="actionSend" />
+    android:gravity="top"
+    android:layout_gravity="center" />
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:onClick="postComment"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>
+</LinearLayout>
