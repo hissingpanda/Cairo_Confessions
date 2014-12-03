@@ -18,7 +18,7 @@
 
 	<string name="title_home">Home</string>
     <string name="title_section1">Notifications</string>
-    <string name="title_section2">Followers</string>
+    <string name="title_section2">Following</string>
     <string name="title_section3">Messages</string>
     <string name="title_section4">Settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -36,7 +36,7 @@
     <string name="close">Close</string>
 
     <!-- Titles -->
-    <string name="app_name">Cario Confessions</string>
+    <string name="app_name">Cairo Confessions</string>
 
     <!-- Actions -->
 

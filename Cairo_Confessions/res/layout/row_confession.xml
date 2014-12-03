@@ -18,6 +18,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+	android:background="#080808"
     android:animateLayoutChanges="true">
     <ScrollView
         android:id="@+id/comment_scroll"
@@ -47,24 +48,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
+        android:background="#ffffff"
         android:text="What's going on?"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:padding="5dp"
         android:textColor="@color/confession"
         android:textSize="18sp"
-        android:layout_margin="5dp"        
-    	android:padding="5dp"
         android:textStyle="normal"
         android:typeface="serif" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
+        android:background="#ffffff"
+        android:layout_marginBottom="2dp"
+        android:padding="5dp"
         android:text="I felt the exact same last year, it gets better!"
         android:textColor="@color/confession"
         android:textSize="18sp"
-        android:layout_margin="5dp"        
-    	android:padding="5dp"
         android:textStyle="normal"
         android:typeface="serif" />
     
@@ -83,9 +85,8 @@
     android:inputType="textMultiLine"
     android:lines="2"
     android:cursorVisible="false"
-    android:background="@drawable/back"
-    android:hint="Comment..."
-    android:padding="5dp"
+    android:background="#ffffff"
+    android:hint="Reply..."
     android:gravity="top"
     android:layout_gravity="center" />
     <Button 

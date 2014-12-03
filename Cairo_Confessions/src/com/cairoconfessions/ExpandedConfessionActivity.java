@@ -126,8 +126,8 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 		tx.setTypeface(Typeface.SERIF, Typeface.NORMAL);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		lp.setMargins((int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),
-				(int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f));
+		lp.setMargins((int) (0), (int) (0),
+				(int) (scale * 2 + 0.5f), (int) (0));
 		tx.setLayoutParams(lp); // close to 100dp
 
 		tx.setPadding((int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),
@@ -141,6 +141,7 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 						.fullScroll(ScrollView.FOCUS_DOWN);
 			}
 		}, 500);
+		/*
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -150,7 +151,7 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 							}
 						});
 			}
-		}, 5000);
+		}, 5000); */
 		setResult(1, intent);
 	}
 }

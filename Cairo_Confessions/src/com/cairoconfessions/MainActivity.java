@@ -119,7 +119,7 @@ public class MainActivity extends FragmentActivity implements
 			((TextView) view).setText("Unfollow");
 		else {
 			((TextView) view).setText("Follow");
-			if (mTitle.equals("Followers"))
+			if (mTitle.equals("Following"))
 				((LinearLayout) view.getParent().getParent().getParent())
 						.setVisibility(View.GONE);
 		}
@@ -523,7 +523,7 @@ public class MainActivity extends FragmentActivity implements
 					currDesc.setVisibility(View.GONE);
 				if (Categories.contains(currDesc.getContentDescription())
 						&& Cities.contains(currLoc))
-					if (mTitle.equals("Followers")) {
+					if (mTitle.equals("Following")) {
 						if (((TextView) currDesc
 								.findViewById(R.id.follow_button)).getText()
 								.equals("Unfollow"))
@@ -534,7 +534,7 @@ public class MainActivity extends FragmentActivity implements
 				if (!Cities.contains(currLoc))
 					currDesc.setVisibility(View.GONE);
 				if (Cities.contains(currLoc)) {
-					if (mTitle.equals("Followers")) {
+					if (mTitle.equals("Following")) {
 						if (((TextView) currDesc
 								.findViewById(R.id.follow_button)).getText()
 								.equals("Unfollow"))
@@ -546,7 +546,7 @@ public class MainActivity extends FragmentActivity implements
 				if (!Categories.contains(currDesc.getContentDescription()))
 					currDesc.setVisibility(View.GONE);
 				if (Categories.contains(currDesc.getContentDescription())) {
-					if (mTitle.equals("Followers")) {
+					if (mTitle.equals("Following")) {
 						if (((TextView) currDesc
 								.findViewById(R.id.follow_button)).getText()
 								.equals("Unfollow"))
@@ -555,7 +555,7 @@ public class MainActivity extends FragmentActivity implements
 						currDesc.setVisibility(View.VISIBLE);
 				}
 			} else if (Categories.isEmpty() && Cities.isEmpty()) {
-				if (mTitle.equals("Followers")) {
+				if (mTitle.equals("Following")) {
 					if (((TextView) currDesc.findViewById(R.id.follow_button))
 							.getText().equals("Unfollow"))
 						currDesc.setVisibility(View.VISIBLE);
