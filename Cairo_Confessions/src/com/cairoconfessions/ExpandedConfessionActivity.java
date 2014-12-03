@@ -3,7 +3,9 @@ package com.cairoconfessions;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -19,6 +21,8 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -106,6 +110,70 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	/*
+	 * This is crashing so just recreated method 
+	 
+	public void callReport(View view){
+	    MainActivity mActivity = new MainActivity();
+		mActivity.report(view);
+	}
+	*/
+	public void report(View view) {
+
+		final EditText edit = new EditText(this);
+		final RadioGroup choices = new RadioGroup(this);
+		edit.setText("I would like to report this confession");
+		final String[] selectedItem = getResources().getStringArray(
+				R.array.report_choices);
+
+		for (int i = 0; i < selectedItem.length; i++) {
+			RadioButton choice = new RadioButton(this);
+			choice.setText(selectedItem[i]);
+			choices.addView(choice);
+		}
+		choices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// checkedId is the RadioButton selected
+				edit.setText("I would like to report this confession as "
+						+ ((RadioButton) group.findViewById(checkedId))
+								.getText().toString());
+
+			}
+		});
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(choices);
+		ll.addView(edit);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Choose which categories:")
+				.setView(ll)
+				.setPositiveButton(R.string.send,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked OK button
+								reportReceived();
+							}
+						})
+				.setNegativeButton(R.string.cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked Cancel button
+							}
+						}).show();
+	}
+
+	public void reportReceived() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setMessage("Your report was sent!")
+				.setPositiveButton(R.string.close,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// User clicked Close button
+							}
+						}).show();
+	}
 
 	public void postComment(View view) {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -127,7 +195,7 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		lp.setMargins((int) (0), (int) (0),
-				(int) (scale * 2 + 0.5f), (int) (0));
+				(int) (scale * 2 + 0.5f), (int) (scale * 2 + 0.5f));
 		tx.setLayoutParams(lp); // close to 100dp
 
 		tx.setPadding((int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),

@@ -30,7 +30,7 @@
             android:completionThreshold="1"
             android:focusable="true"
 			android:focusableInTouchMode="true"
-            android:hint="Add location" />
+            android:hint="New location" />
 
         <Button
             android:layout_width="wrap_content"

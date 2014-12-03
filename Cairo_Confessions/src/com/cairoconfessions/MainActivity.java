@@ -79,7 +79,7 @@ public class MainActivity extends FragmentActivity implements
 	 * The pager adapter, which provides the pages to the view pager widget.
 	 */
 	private PagerAdapter mPagerAdapter;
-	private SwipeyTabsView mSwipeyTabs;
+	static SwipeyTabsView mSwipeyTabs;
 	private TabsAdapter mSwipeyTabsAdapter;
 
 	@Override
@@ -107,6 +107,7 @@ public class MainActivity extends FragmentActivity implements
 		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this);
 		mSwipeyTabs.setAdapter(mSwipeyTabsAdapter);
 		mSwipeyTabs.setViewPager(mPager);
+		//mSwipeyTabs.setVisibility(View.GONE);
 		Confessions = getResources().getStringArray(R.array.confession_array);
 		for (int i = 0; i < Confessions.length; i++)
 			addConfession(Confessions[i].toString(), "");

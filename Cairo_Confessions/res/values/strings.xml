@@ -79,6 +79,7 @@
         <item>Fanatasy</item>
     </string-array>
     <string-array name="lang_array">
+        <item>All</item>
         <item>English</item>
         <item>Arabic</item>
         <item>3rabi</item>

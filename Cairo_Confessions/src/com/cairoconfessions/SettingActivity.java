@@ -2,6 +2,7 @@ package com.cairoconfessions;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -25,6 +26,10 @@ public class SettingActivity extends Activity {
 		spinner.setAdapter(adapter);
 		// setTitle("Cairo Confessions");
 
+	}
+	
+	public void hidetabs(View view){
+		MainActivity.mSwipeyTabs.setVisibility(View.GONE);
 	}
 
 	}
