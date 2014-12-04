@@ -118,6 +118,9 @@ public class ExpandedConfessionActivity extends FragmentActivity {
 		mActivity.report(view);
 	}
 	*/
+	public void gotoMessage(View view){
+		//setContentView(R.layout.activity_conversation);
+	}
 	public void report(View view) {
 
 		final EditText edit = new EditText(this);

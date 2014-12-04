@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;

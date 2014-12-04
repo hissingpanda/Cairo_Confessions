@@ -48,17 +48,18 @@
     <string name="received">Incoming Message</string>
     <string name="sent">Sent Message</string>
 	<string name="time">TimeStamp</string>
+	<drawable name="transparent_color">#00000000</drawable>
     
     <!-- Accessibility-only descriptions -->
     <!-- Other strings -->
     <string name="lorem_ipsum"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
     <string name="lorem_ipsum_main"><![CDATA[Main\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
 
-    <color name="love">#FF8585</color>
+    <color name="love">#C82536</color>
     <color name="pain">#A062B3</color>
     <color name="guilt">#52806F</color>
     <color name="dream">#ADDEE0</color>
-    <color name="fantasy">#FF6BC2</color>
+    <color name="fantasy">#4372AA</color>
     <color name="confession">#222222</color>
 
     <string-array name="countries_array">
