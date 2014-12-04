@@ -70,27 +70,29 @@ public class Conversation extends Activity {
 		setResult(1, intent);
 		final float scale = getResources().getDisplayMetrics().density;
 		tx.setText(message);
-		tx.setBackgroundColor(Color.parseColor("#009933"));
+		tx.setBackgroundResource(R.drawable.back);
 		tx.setTextColor(getResources().getColor(R.color.confession));
 		tx.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tx.setTypeface(Typeface.SERIF, Typeface.NORMAL);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		lp.setMargins((int) (0), (int) (0),
-				(int) (scale * 2 + 0.5f), (int) (scale * 2 + 0.5f));
+		lp.setMargins((int) (scale * 2 + 0.5f), (int) (0),
+				(int) (scale * 75 + 0.5f), (int) (scale * 2 + 0.5f));
 		tx.setLayoutParams(lp); // close to 100dp
 
 		tx.setPadding((int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f),
-				(int) (scale * 5 + 0.5f), (int) (scale * 5 + 0.5f));
+				(int) (scale * 2 + 0.5f), (int) (scale * 5 + 0.5f));
 		linLayout.addView(tx);
 		editText.setText("");
+		
+		/*
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				((ScrollView) findViewById(R.id.comment_scroll))
 						.fullScroll(ScrollView.FOCUS_DOWN);
 			}
-		}, 500);
+		}, 500);*/
 		/*
 		new Timer().schedule(new TimerTask() {
 			@Override
