@@ -9,18 +9,21 @@ import android.os.Parcelable;
 public class ConversationListItem implements Parcelable {
 	private String person;
 	private String recentMessage;
+	private String emotion;
 	private ArrayList<ConversationItem> conversation;
 	
-	public ConversationListItem(String person, String recentMessage, ArrayList<ConversationItem> conversation) {
+	public ConversationListItem(String person, String emotion, String recentMessage, ArrayList<ConversationItem> conversation) {
 		super();
 		this.person = person;
-		this.recentMessage = recentMessage;
+		this.emotion = emotion;
+		this.recentMessage = recentMessage;		
 		this.conversation = conversation;
 	}
 	
 	public ConversationListItem(Parcel in) {
 		person = in.readString();
-		recentMessage = in.readString();
+		emotion = in.readString();
+		recentMessage = in.readString();		
 		in.readList(conversation, ConversationListItem.class.getClassLoader());
 	}
 	
@@ -29,6 +32,10 @@ public class ConversationListItem implements Parcelable {
 	}
 	public String getRecentMessage() {
 		return recentMessage;
+	}
+	
+	public String getEmotion() {
+		return emotion;
 	}
 	
 	public ArrayList<ConversationItem> getConversation() {
@@ -55,6 +62,7 @@ public class ConversationListItem implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(person);
+		dest.writeString(emotion);
 		dest.writeString(recentMessage);
 		dest.writeList(conversation);
 	}

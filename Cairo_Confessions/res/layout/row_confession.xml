@@ -143,7 +143,8 @@
     android:inputType="textMultiLine"
     android:lines="2"
     android:cursorVisible="false"
-    android:background="#ffffff"
+    android:background="@drawable/back"
+    android:paddingLeft="8dp"
     android:hint="Reply..."
     android:gravity="top"
     android:layout_gravity="center" />

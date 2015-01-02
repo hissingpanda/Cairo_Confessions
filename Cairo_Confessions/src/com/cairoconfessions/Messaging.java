@@ -32,7 +32,7 @@ public class Messaging extends Activity {
 		if (conversationList.size() == 0) {
 			ArrayList<ConversationItem> convo1 = new ArrayList<ConversationItem>();
 			convo1.add(new ConversationItem("I was in a very similar situation a year ago and I want to let you know that everything will be alright as long as you don't give up", "9:45 AM", 1));
-			convo1.add(new ConversationItem("What can I do to keep going?", "9:47 AM", 0));
+			convo1.add(new ConversationItem("What can I do to keep going? Just sitting here being unable to think about it is making it worse.", "9:47 AM", 0));
 			convo1.add(new ConversationItem("Try and create something, express yourself.", "9:48 AM", 1));
 			convo1.add(new ConversationItem("Thank you", "9:48 AM", 0));
 			convo1.add(new ConversationItem("If you have anything you want to discuss just let me know. I'm happy to help you get through this.", "9:48 AM", 1));
@@ -51,10 +51,10 @@ public class Messaging extends Activity {
 			ArrayList<ConversationItem> convo4 = new ArrayList<ConversationItem>();
 			convo4.add(new ConversationItem("Thank you for the advice! c:", "6:01 PM", 0));
 			
-			conversationList.add(new ConversationListItem("Ray", convo1.get(convo1.size()-1).getMessage(), convo1));
-			conversationList.add(new ConversationListItem("Gerald", convo2.get(convo2.size()-1).getMessage(), convo2));
-			conversationList.add(new ConversationListItem("Ammon", convo3.get(convo3.size()-1).getMessage(), convo3));
-			conversationList.add(new ConversationListItem("Rachel", convo4.get(convo4.size()-1).getMessage(), convo4));
+			conversationList.add(new ConversationListItem("Ray", "love", convo1.get(convo1.size()-1).getMessage(), convo1));
+			conversationList.add(new ConversationListItem("Gerald", "pain", convo2.get(convo2.size()-1).getMessage(), convo2));
+			conversationList.add(new ConversationListItem("Ammon", "dream", convo3.get(convo3.size()-1).getMessage(), convo3));
+			conversationList.add(new ConversationListItem("Rachel", "pain", convo4.get(convo4.size()-1).getMessage(), convo4));
 		}
 	}
 	
@@ -78,6 +78,8 @@ public class Messaging extends Activity {
 			
 			Bundle bundle = new Bundle();
 			bundle.putParcelableArrayList("conversation", conversationList.get(position).getConversation());
+			Log.d("Messaging", "Emotion: " + conversationList.get(position).getEmotion());
+			bundle.putString("emotion", conversationList.get(position).getEmotion());
 			intent.putExtras(bundle);
 			
 			startActivity(intent);
@@ -97,6 +99,18 @@ public class Messaging extends Activity {
 			}
 			
 			ConversationListItem currentConversation = conversationList.get(position);
+			String emotion = currentConversation.getEmotion();
+			
+			if (emotion == "love") {
+				itemView.setBackgroundResource(R.color.love);
+			}
+			else if (emotion == "pain") {
+				itemView.setBackgroundResource(R.color.pain);
+			}
+			else if (emotion == "dream") {
+				itemView.setBackgroundResource(R.color.dream);
+			}
+			
 			TextView personText = (TextView) itemView.findViewById(R.id.convList_person);
 			personText.setText(currentConversation.getPerson());
 			
